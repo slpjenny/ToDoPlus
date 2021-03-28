@@ -61,4 +61,7 @@ public class Routine_Fragment extends Fragment {
         ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_routine_, container, false);
         return rootView;
     }
+
+    //브랜치는 이렇게 사용하는겁니다.
+    //왜 마스터로 바꿔도 이 주석이 남아있을까요?
 }
