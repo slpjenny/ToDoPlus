@@ -64,4 +64,5 @@ public class Routine_Fragment extends Fragment {
 
     //브랜치는 이렇게 사용하는겁니다.
     //왜 마스터로 바꿔도 이 주석이 남아있을까요?
+    //커밋을 해야 적용이 된다!!
 }
