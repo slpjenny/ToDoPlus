@@ -33,6 +33,7 @@
             android:id="@+id/textView3"
             android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="메모 이름"
@@ -40,9 +41,11 @@
             android:textColor="#232323"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_width="215dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank"
             />
 
     </LinearLayout>
@@ -62,9 +65,11 @@
             android:textColor="#232323"/>
 
         <EditText
-            android:layout_width="200dp"
+            android:layout_width="215dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/edittext_blank"/>
 
     </LinearLayout>
 

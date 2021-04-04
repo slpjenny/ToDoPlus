@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="10dip" />
+            <!-- 배경색 -->
+            <solid android:color="#FBFAFA" />
+            <!-- 라인색 및 두께 -->
+            <stroke android:width="1dp" android:color="#5A5A5A"/>
+        </shape>
+    </item>
+
+</layer-list>

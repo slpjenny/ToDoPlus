@@ -33,6 +33,7 @@
             android:id="@+id/todoName"
             android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="루틴 이름"
@@ -41,8 +42,10 @@
 
         <EditText
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank"
             />
 
     </LinearLayout>
@@ -58,14 +61,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="0dp"
+            android:layout_gravity="center"
             android:text="요일"
             android:textColor="#232323"
             android:textStyle="bold" />
 
         <EditText
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank"
             />
 
     </LinearLayout>
@@ -79,6 +85,7 @@
             android:id="@+id/time"
             android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시간"
@@ -87,8 +94,10 @@
 
         <EditText
             android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="60dp"/>
+            android:layout_height="40dp"
+            android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank"/>
 
     </LinearLayout>
 
@@ -101,6 +110,7 @@
             android:id="@+id/place"
             android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="장소"
@@ -109,8 +119,10 @@
 
         <EditText
             android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="60dp"/>
+            android:layout_height="40dp"
+            android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank"/>
 
     </LinearLayout>
 
