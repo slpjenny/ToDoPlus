@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Routine_Fragment routine_fragment;
 
     ViewPager pager;
+    Menu menu;
 
 
     @Override
@@ -50,13 +52,15 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        menu=bottomNavigationView.getMenu();
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.tab1:
                         pager.setCurrentItem(0);
-
                         return true;
 
                     case R.id.tab2:
