@@ -137,7 +137,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="135dp"
             android:text="완료"
-            android:backgroundTint="#038058"/>
+            android:backgroundTint="#189B75"/>
 
     </LinearLayout>
 </LinearLayout>

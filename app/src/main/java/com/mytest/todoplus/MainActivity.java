@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.tab1:
                         pager.setCurrentItem(0);
+
                         return true;
 
                     case R.id.tab2:

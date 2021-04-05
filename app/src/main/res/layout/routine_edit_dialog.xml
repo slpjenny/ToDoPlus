@@ -140,7 +140,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="20dp"
             android:text="삭제"
-            android:backgroundTint="#F6A51B"/>
+            android:backgroundTint="#EDA45A"/>
 
         <Button
             android:id="@+id/routineEdit_ok"
@@ -149,7 +149,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:text="확인"
-            android:backgroundTint="#F6A51B"/>
+            android:backgroundTint="#EDA45A"/>
 
     </LinearLayout>
 </LinearLayout>

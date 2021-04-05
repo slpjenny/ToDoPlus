@@ -6,21 +6,21 @@
         android:id="@+id/tab1"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/one_line"
+        android:icon="@drawable/calendar_menu_gray"
         android:title="달력"/>
 
     <item
         android:id="@+id/tab2"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/one_line"
+        android:icon="@drawable/todo_menu_gray"
         android:title="할 일"/>
 
     <item
         android:id="@+id/tab3"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/one_line"
+        android:icon="@drawable/routine_menu_gray"
         android:title="루틴"/>
 
 
