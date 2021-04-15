@@ -7,21 +7,21 @@
         app:showAsAction="always"
         android:enabled="true"
         android:icon="@drawable/calendar_menu_gray"
-        android:title="달력"/>
+        android:title=""/>
 
     <item
         android:id="@+id/tab2"
         app:showAsAction="always"
         android:enabled="true"
         android:icon="@drawable/todo_menu_gray"
-        android:title="할 일"/>
+        android:title=""/>
 
     <item
         android:id="@+id/tab3"
         app:showAsAction="always"
         android:enabled="true"
         android:icon="@drawable/routine_menu_gray"
-        android:title="루틴"/>
+        android:title=""/>
 
 
 </menu>
