@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/memo_cancel"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/remove"
@@ -41,6 +42,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/memoName"
             android:layout_width="215dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -61,10 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="메모 이름"
+            android:text="메모 내용"
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/memoContent"
             android:layout_width="215dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
