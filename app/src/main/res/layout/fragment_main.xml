@@ -55,33 +55,35 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/routine_add"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="92dp"
             android:layout_weight="1"
             android:backgroundTint="#DCF4EC"
-            android:drawableLeft="@drawable/plus_btn_small"
-            android:gravity="center"
+            android:background="@drawable/main_round_btn"
+
             android:paddingLeft="25dip"
             android:text="루틴 추가하기"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="10dp"/>
+            />
 
         <Button
-            android:id="@+id/todo_add"
+            android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="92dp"
             android:layout_weight="1"
             android:backgroundTint="#DCF4EC"
-            android:drawableLeft="@drawable/plus_btn_small"
+
             android:paddingLeft="25dip"
             android:text="할일 추가하기"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="5dp"/>
+            />
 
     </LinearLayout>
 
