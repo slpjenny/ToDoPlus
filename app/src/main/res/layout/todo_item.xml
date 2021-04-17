@@ -51,12 +51,14 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/yellowLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/yellow_vertical_line">
     </ImageView>
 
     <TextView
+        android:id="@+id/ToDo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ToDo"

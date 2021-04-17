@@ -1,5 +1,7 @@
 package com.mytest.todoplus;
 
+import android.widget.ImageView;
+
 public class todo_object {
     String todoTitle;
     String todoTime;
