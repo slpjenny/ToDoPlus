@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/plusMemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:background="@drawable/plus_btn_large"
             android:layout_marginLeft="280dp"/>
 
@@ -47,7 +47,7 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="280dp"
             android:layout_marginTop="8dp"/>
 
     </LinearLayout>
