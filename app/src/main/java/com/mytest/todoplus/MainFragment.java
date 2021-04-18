@@ -10,16 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+// 현재 날짜 받아오기
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainFragment extends Fragment {
 
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     public MainFragment() {
         // Required empty public constructor
+
     }
 
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
+
         return fragment;
     }
 
@@ -27,6 +38,13 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    // 날짜,시간 가져오는 함수
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 
     @Override
@@ -45,6 +63,11 @@ public class MainFragment extends Fragment {
 
         //이거 없으면 리싸이클러 뷰 안나타남
         recyclerView.setAdapter(adapter);
+
+        // 오늘 날짜 표시
+        TextView textView=rootView.findViewById(R.id.showDate);
+        textView.setText(getTime());
+
 
         return rootView;
     }
