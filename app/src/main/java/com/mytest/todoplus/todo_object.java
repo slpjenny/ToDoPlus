@@ -3,22 +3,32 @@ package com.mytest.todoplus;
 import android.widget.ImageView;
 
 public class todo_object {
-    String todoTitle;
-    String todoTime;
-    String todoPlace;
+    String itemTitle;
+    String itemTime;
+    String itemPlace;
+    int itemLine;
+    String itemType;
 
-    public todo_object(String todoTitle,String todoTime,String todoPlace){
-        this.todoTitle=todoTitle;
-        this.todoTime=todoTime;
-        this.todoPlace=todoPlace;
+    public todo_object(String itemTitle,String itemTime,String itemPlace,int itemLine,String itemType){
+        this.itemTitle=itemTitle;
+        this.itemTime=itemTime;
+        this.itemPlace=itemPlace;
+        this.itemLine=itemLine;
+        this.itemType=itemType;
     }
 
-    public String getTodoTitle() {return todoTitle;}
-    public void setTodoTitle(String todoTitle) {this.todoTitle = todoTitle;}
+    public String getItemTitle() {return itemTitle;}
+    public void setItemTitle(String itemTitle) {this.itemTitle = itemTitle;}
 
-    public String getTodoTime() {return todoTime;}
-    public void setTodoTime(String todoTime) {this.todoTime = todoTime;}
+    public String getItemTime() {return itemTime;}
+    public void setItemTime(String itemTime) {this.itemTime = itemTime;}
 
-    public String getTodoPlace() {return todoPlace;}
-    public void setTodoPlace(String todoPlace) {this.todoPlace = todoPlace;}
+    public String getItemPlace() {return itemPlace;}
+    public void setItemPlace(String itemPlace) {this.itemPlace = itemPlace;}
+
+    public int getItemLine() {return itemLine;}
+    public void setItemLine(int itemLine) {this.itemLine = itemLine;}
+
+    public String getItemType() {return itemType;}
+    public void setItemType(String itemType) {this.itemType = itemType;}
 }

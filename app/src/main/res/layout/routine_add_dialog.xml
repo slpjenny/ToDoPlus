@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/rtn_cancel"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/remove"
@@ -41,6 +42,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_title"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -67,6 +69,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/rtn_day"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="60dp"
@@ -93,6 +96,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_time"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="60dp"
@@ -118,6 +122,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_place"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="60dp"
@@ -131,7 +136,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/routineAdd_ok"
+            android:id="@+id/rtn_add_ok"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

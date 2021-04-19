@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +26,6 @@ public class MainFragment extends Fragment {
 
     public MainFragment() {
         // Required empty public constructor
-
     }
 
     public static MainFragment newInstance(String param1, String param2) {
@@ -37,7 +38,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     // 날짜,시간 가져오는 함수
@@ -59,7 +59,9 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         todoAdapter adapter=new todoAdapter();
 
-        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom"));
+        //recyclerView item 예시
+        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"ToDo"));
+        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
 
         //이거 없으면 리싸이클러 뷰 안나타남
         recyclerView.setAdapter(adapter);
@@ -68,6 +70,25 @@ public class MainFragment extends Fragment {
         TextView textView=rootView.findViewById(R.id.showDate);
         textView.setText(getTime());
 
+        //루틴 추가 버튼 누르면 해당 다이얼로그 팝업
+        Button routine_add_btn=rootView.findViewById(R.id.routine_add_btn);
+        routine_add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                routine_add_dialog rtn_dlg = new routine_add_dialog(getContext());
+                rtn_dlg.show();
+            }
+        });
+
+        //할일 추가 버튼 누르면 해당 다이얼로그 팝업
+        Button todo_add_btn=rootView.findViewById(R.id.todo_add_btn);
+        todo_add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                todo_add_dialog td_dlg = new todo_add_dialog(getContext());
+                td_dlg.show();
+            }
+        });
 
         return rootView;
     }
