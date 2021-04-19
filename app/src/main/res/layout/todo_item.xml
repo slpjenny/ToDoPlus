@@ -6,7 +6,7 @@
     android:background="@drawable/item_background">
 
     <LinearLayout
-        android:layout_width="306dp"
+        android:layout_width="290dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/todo_title"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="지영이랑 안드 회의"
                 android:textSize="17sp"></TextView>
@@ -35,15 +35,16 @@
 
             <TextView
                 android:id="@+id/todo_time"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7~7:30"
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/todo_place"
-                android:layout_width="160dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7~7:30| 각자 집에서"
+                android:layout_marginLeft="15dp"
+                android:text="각자 집에서"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -61,10 +62,10 @@
         android:id="@+id/ToDo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="ToDo"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginLeft="15dp"/>
+        android:textAlignment="center" />
 </LinearLayout>

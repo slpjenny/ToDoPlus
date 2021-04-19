@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         todoAdapter adapter=new todoAdapter();
 
-        adapter.addItem(new todo_object("지영이랑 안드로이드..","10:22","zoom"));
+        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom"));
 
         //이거 없으면 리싸이클러 뷰 안나타남
         recyclerView.setAdapter(adapter);
