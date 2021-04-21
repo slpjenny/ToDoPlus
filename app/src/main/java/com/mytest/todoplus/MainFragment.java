@@ -28,7 +28,7 @@ public class MainFragment extends Fragment {
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
-    static todoAdapter adapter=new todoAdapter();
+    public static todoAdapter adapter=new todoAdapter();
 
     public MainFragment() {
         // Required empty public constructor
@@ -66,10 +66,11 @@ public class MainFragment extends Fragment {
         //여기가 원래자리
 
         //recyclerView item 예시
-//        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
+        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
 //        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
 
         //이거 없으면 리싸이클러 뷰 안나타남
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
         // 오늘 날짜 표시

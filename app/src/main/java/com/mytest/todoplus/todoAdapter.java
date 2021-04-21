@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
 
-    ArrayList<todo_object> items=new ArrayList<todo_object>();
+    static ArrayList<todo_object> items=new ArrayList<todo_object>();
 
     //배열 리스트 items에 새로운 item 객체 추가하기기
-   public void addItem(todo_object item){items.add(item);}
+   public static void addItem(todo_object item){items.add(item);}
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 

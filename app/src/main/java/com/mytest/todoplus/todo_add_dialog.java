@@ -24,8 +24,6 @@ public class todo_add_dialog extends Dialog {
     static String todo_time_str;
     static String todo_place_str;
 
-    static todoAdapter adapter=new todoAdapter();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +51,7 @@ public class todo_add_dialog extends Dialog {
                 todo_place_str=todo_place.getText().toString();
 
                 todo_object todo_item = new todo_object(todo_title_str,todo_time_str,todo_place_str, R.drawable.green_vertical_line,"ToDo");
-                adapter.addItem(todo_item);
-                adapter.notifyDataSetChanged();
+                todoAdapter.addItem(todo_item);
 
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 
