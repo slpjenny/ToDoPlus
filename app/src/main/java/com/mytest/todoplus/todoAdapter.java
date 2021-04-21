@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
 
     ArrayList<todo_object> items=new ArrayList<todo_object>();
-    public void addItem(todo_object item){items.add(item);}
+
+    //배열 리스트 items에 새로운 item 객체 추가하기기
+   public void addItem(todo_object item){items.add(item);}
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -61,6 +63,5 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
             item_line.setImageResource(item.getItemLine());
             item_type.setText(item.getItemType());
         }
-
     }
 }

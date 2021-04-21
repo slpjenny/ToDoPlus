@@ -1,8 +1,10 @@
 package com.mytest.todoplus;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // 현재 날짜 받아오기
 import java.text.SimpleDateFormat;
@@ -23,6 +28,7 @@ public class MainFragment extends Fragment {
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+    static todoAdapter adapter=new todoAdapter();
 
     public MainFragment() {
         // Required empty public constructor
@@ -57,11 +63,11 @@ public class MainFragment extends Fragment {
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        todoAdapter adapter=new todoAdapter();
+        //여기가 원래자리
 
         //recyclerView item 예시
-        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"ToDo"));
-        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
+//        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
+//        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
 
         //이거 없으면 리싸이클러 뷰 안나타남
         recyclerView.setAdapter(adapter);
@@ -92,4 +98,5 @@ public class MainFragment extends Fragment {
 
         return rootView;
     }
+
 }
