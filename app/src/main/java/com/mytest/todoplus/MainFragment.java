@@ -63,7 +63,6 @@ public class MainFragment extends Fragment {
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        //여기가 원래자리
 
         //recyclerView item 예시
         adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
