@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +20,11 @@ public class routine_add_dialog extends Dialog {
 
     private ImageView rtn_cancel;
     private Button rtn_add_ok;
+
+    static String rtn_title_str;
+    static String rtn_day_str;
+    static String rtn_time_str;
+    static String rtn_place_str;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,18 @@ public class routine_add_dialog extends Dialog {
 
         rtn_add_ok.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                rtn_title_str=rtn_title.getText().toString();
+                rtn_day_str=rtn_day.getText().toString();
+                rtn_time_str=rtn_time.getText().toString();
+                rtn_place_str=rtn_place.getText().toString();
+
+                todo_object todo_item = new todo_object(rtn_title_str,rtn_time_str,rtn_place_str, R.drawable.yellow_vertical_line,"Routine",rtn_day_str);
+                todoAdapter.addItem(todo_item);
+
+                Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+
                 dismiss();
             }
         });

@@ -65,7 +65,7 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         //recyclerView item 예시
-        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
+//        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
 //        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
 
         //이거 없으면 리싸이클러 뷰 안나타남

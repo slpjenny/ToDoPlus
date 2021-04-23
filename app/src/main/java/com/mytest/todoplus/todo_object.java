@@ -9,12 +9,16 @@ public class todo_object {
     int itemLine;
     String itemType;
 
-    public todo_object(String itemTitle,String itemTime,String itemPlace,int itemLine,String itemType){
+    //루틴에만 들어가는 요소
+    String itemDay;
+
+    public todo_object(String itemTitle,String itemTime,String itemPlace,int itemLine,String itemType,String itemDay){
         this.itemTitle=itemTitle;
         this.itemTime=itemTime;
         this.itemPlace=itemPlace;
         this.itemLine=itemLine;
         this.itemType=itemType;
+        this.itemDay=itemDay;
     }
 
     public String getItemTitle() {return itemTitle;}
@@ -31,4 +35,7 @@ public class todo_object {
 
     public String getItemType() {return itemType;}
     public void setItemType(String itemType) {this.itemType = itemType;}
+
+    public String getItemDay() {return itemDay;}
+    public void setItemDay(String itemDay) {this.itemDay = itemDay;}
 }

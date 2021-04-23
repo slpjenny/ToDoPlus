@@ -42,6 +42,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
         static TextView item_place;
         static ImageView item_line;
         static TextView item_type;
+        static TextView item_day;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -51,6 +52,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
             item_place = itemView.findViewById(R.id.item_place);
             item_line= itemView.findViewById(R.id.item_line);
             item_type=itemView.findViewById(R.id.item_type);
+            item_day=itemView.findViewById(R.id.item_day);
 
             //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.
             //각각의 item 뷰가 클릭되었을 때~ 인터페이스로 만든 함수 호출
@@ -62,6 +64,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
             item_place.setText(item.getItemPlace());
             item_line.setImageResource(item.getItemLine());
             item_type.setText(item.getItemType());
+            item_day.setText(item.getItemDay());
         }
     }
 }
