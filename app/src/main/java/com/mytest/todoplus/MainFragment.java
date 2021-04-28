@@ -96,6 +96,22 @@ public class MainFragment extends Fragment {
             }
         });
 
+        adapter.setOnItemClickListener(new OnToDoItemClickListener() {
+            @Override
+            public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
+                todo_object item=adapter.getItem(position);
+
+                //아이템 종류에 따라서 다른 '수정 다이얼로그' 띄우기
+                if(item.itemType=="ToDo") {
+                    todo_edit_dialog td_edit_dlg = new todo_edit_dialog(getContext());
+                    td_edit_dlg.show();
+                }else if(item.itemType=="Routine"){
+                    routine_edit_dialog rtn_edit_dlg = new routine_edit_dialog(getContext());
+                    rtn_edit_dlg.show();
+                }
+            }
+        });
+
         return rootView;
     }
 

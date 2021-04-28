@@ -7,12 +7,19 @@
     android:background="@drawable/dialog_round_yellow"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/todoEdit_cancel"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/remove"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="310dp"/>
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="45dp"
         android:text="할일 수정"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -24,7 +31,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/todoName"
+            android:id="@+id/todoNametxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -35,6 +42,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/todo_name_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -61,6 +69,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/todo_time_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -87,6 +96,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/todo_place_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -101,7 +111,7 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/todoEdit_cancel"
+            android:id="@+id/todoEdit_remove"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"

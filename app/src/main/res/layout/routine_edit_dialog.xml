@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/rtnEdit_cancel"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/remove"
@@ -41,6 +42,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_title_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -68,6 +70,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/rtn_day_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -95,6 +98,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_time_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -121,6 +125,7 @@
             android:textColor="#232323"/>
 
         <EditText
+            android:id="@+id/rtn_place_edit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -134,7 +139,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/routineEdit_cancel"
+            android:id="@+id/rtnEdit_remove"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
@@ -143,7 +148,7 @@
             android:backgroundTint="#EDA45A"/>
 
         <Button
-            android:id="@+id/routineEdit_ok"
+            android:id="@+id/rtnEdit_ok"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"

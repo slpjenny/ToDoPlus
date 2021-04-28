@@ -11,23 +11,40 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
+public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>implements OnToDoItemClickListener{
 
     static ArrayList<todo_object> items=new ArrayList<todo_object>();
+    OnToDoItemClickListener listener;
 
     //배열 리스트 items에 새로운 item 객체 추가하기기
    public static void addItem(todo_object item){items.add(item);}
+//   public static void
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.todo_item, parent, false);
-        return new ViewHolder(itemView);
+        return new ViewHolder(itemView,this);
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public todo_object getItem(int position){
+       return items.get(position);
+    }
+
+    public void setOnItemClickListener(OnToDoItemClickListener listener){
+       this.listener=listener;
+    }
+
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if(listener!=null){
+            listener.onItemClick(holder,view,position);
+        }
     }
 
     @Override
@@ -44,7 +61,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
         static TextView item_type;
         static TextView item_day;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(View itemView, OnToDoItemClickListener listener) {
             super(itemView);
 
             item_title = itemView.findViewById(R.id.item_title);
@@ -54,9 +71,20 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>{
             item_type=itemView.findViewById(R.id.item_type);
             item_day=itemView.findViewById(R.id.item_day);
 
-            //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.
+            //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.***
             //각각의 item 뷰가 클릭되었을 때~ 인터페이스로 만든 함수 호출
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position=getAdapterPosition();
+                    if(listener != null){
+                        listener.onItemClick(ViewHolder.this,view,position);
+                    }
+                }
+            });
         }
+
+
 
         public static void setItem(todo_object item) {
             item_title.setText(item.getItemTitle());
