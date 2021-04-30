@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 // 현재 날짜 받아오기
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,6 +32,7 @@ public class MainFragment extends Fragment {
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static todoAdapter adapter=new todoAdapter();
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -99,13 +103,20 @@ public class MainFragment extends Fragment {
         adapter.setOnItemClickListener(new OnToDoItemClickListener() {
             @Override
             public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
-                todo_object item=adapter.getItem(position);
+                todo_object itemInfo=adapter.getItem(position);
 
                 //아이템 종류에 따라서 다른 '수정 다이얼로그' 띄우기
-                if(item.itemType=="ToDo") {
+                if(itemInfo.itemType=="ToDo") {
+
+                    //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
+//                    Bundle args = new Bundle();
                     todo_edit_dialog td_edit_dlg = new todo_edit_dialog(getContext());
+
+//                    args.putBundle("itemInfo",item);
+//                    td_edit_dlg.setArguments(args);
                     td_edit_dlg.show();
-                }else if(item.itemType=="Routine"){
+
+                }else if(itemInfo.itemType=="Routine"){
                     routine_edit_dialog rtn_edit_dlg = new routine_edit_dialog(getContext());
                     rtn_edit_dlg.show();
                 }

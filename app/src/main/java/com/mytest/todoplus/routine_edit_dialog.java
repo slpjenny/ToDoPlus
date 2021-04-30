@@ -52,6 +52,7 @@ public class routine_edit_dialog extends Dialog {
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
 
+
                 //다이얼로그 사라짐.
                 dismiss();
             }

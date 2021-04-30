@@ -2,13 +2,18 @@ package com.mytest.todoplus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+
 public class todo_edit_dialog extends Dialog {
 
     private EditText todo_name_edit;
@@ -23,6 +28,8 @@ public class todo_edit_dialog extends Dialog {
     static String todo_Ename_str;
     static String todo_Etime_str;
     static String todo_Eplace_str;
+    private Bundle arguments;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class todo_edit_dialog extends Dialog {
         todoEdit_ok=findViewById(R.id.todoEdit_ok);
         todoEdit_remove=findViewById(R.id.todoEdit_remove);
 
+
         todoEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +58,11 @@ public class todo_edit_dialog extends Dialog {
             @Override
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
+//                Bundle mArgs = getArguments();
+//                todo_object item=(todo_object) mArgs.getSerializable("itemInfo");
+
+                //이제 해당 아이템을 전달받았다!
+//                items.remove(item);
 
                 //다이얼로그 사라짐.
                 dismiss();
@@ -68,5 +81,13 @@ public class todo_edit_dialog extends Dialog {
 
     public todo_edit_dialog(@NonNull Context context) {
         super(context);
+    }
+
+    public void setArguments(Bundle arguments) {
+        this.arguments = arguments;
+    }
+
+    public Bundle getArguments() {
+        return arguments;
     }
 }

@@ -71,6 +71,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>imp
             item_type=itemView.findViewById(R.id.item_type);
             item_day=itemView.findViewById(R.id.item_day);
 
+
             //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.***
             //각각의 item 뷰가 클릭되었을 때~ 인터페이스로 만든 함수 호출
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +84,6 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>imp
                 }
             });
         }
-
-
 
         public static void setItem(todo_object item) {
             item_title.setText(item.getItemTitle());
