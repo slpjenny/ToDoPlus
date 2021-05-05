@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -109,11 +111,20 @@ public class MainFragment extends Fragment {
                 if(itemInfo.itemType=="ToDo") {
 
                     //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
-//                    Bundle args = new Bundle();
                     todo_edit_dialog td_edit_dlg = new todo_edit_dialog(getContext());
+                    String e_TodoTitle=itemInfo.itemTitle;
+                    String e_TodoTime=itemInfo.itemTime;
+                    String e_TodoPlace=itemInfo.itemPlace;
 
-//                    args.putBundle("itemInfo",item);
-//                    td_edit_dlg.setArguments(args);
+//                    todo_edit_dlg2 two=new todo_edit_dlg2();
+//                    two.show(getFragmentManager().beginTransaction());
+
+
+//                    Intent editTodoIntent= new Intent(getActivity(),todo_edit_dialog.class);
+//                    editTodoIntent.putExtra("dataInfo_title",e_TodoTitle);
+//                    editTodoIntent.putExtra("dataInfo_time",e_TodoTime);
+//                    editTodoIntent.putExtra("dataInfo_place",e_TodoPlace);
+
                     td_edit_dlg.show();
 
                 }else if(itemInfo.itemType=="Routine"){
