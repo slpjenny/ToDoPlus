@@ -4,13 +4,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import java.io.Serializable;
 
 public class todo_edit_dlg2 extends DialogFragment {
 
@@ -68,6 +73,12 @@ public class todo_edit_dlg2 extends DialogFragment {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
 
                 //이제 해당 아이템을 전달받았다!
+                Bundle args=getArguments();
+                if(args !=null){
+                    todo_object item= (todo_object) args.getSerializable("itemInfo");
+                    Log.d("d",item.itemDay);
+                }
+
 
                 //다이얼로그 사라짐.
                 dismiss();
