@@ -4,13 +4,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import java.io.Serializable;
 
 public class todo_edit_dlg2 extends DialogFragment {
 
@@ -23,9 +28,9 @@ public class todo_edit_dlg2 extends DialogFragment {
     private Button todoEdit_remove;
 
     //각각 editText 부분에 변경되어서 적힐 내용
-    static String todo_Ename_str;
-    static String todo_Etime_str;
-    static String todo_Eplace_str;
+    String todo_Ename_str;
+    String todo_Etime_str;
+    String todo_Eplace_str;
 
     public todo_edit_dlg2() {}
 
@@ -53,6 +58,18 @@ public class todo_edit_dlg2 extends DialogFragment {
         todoEdit_ok=v.findViewById(R.id.todoEdit_ok);
         todoEdit_remove=v.findViewById(R.id.todoEdit_remove);
 
+
+        if(getArguments() != null) {
+            todo_Ename_str = getArguments().getString("itemTitle");
+            todo_Etime_str = getArguments().getString("itemTime");
+            todo_Eplace_str = getArguments().getString("itemPlace");
+        }
+
+        todo_name_edit.setHint(todo_Ename_str);
+        todo_time_edit.setHint(todo_Etime_str);
+        todo_place_edit.setHint(todo_Eplace_str);
+
+
         todoEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +77,6 @@ public class todo_edit_dlg2 extends DialogFragment {
                 dismiss();
             }
         });
-
 
         todoEdit_remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,4 +98,5 @@ public class todo_edit_dlg2 extends DialogFragment {
         });
         return v;
     }
+
 }
