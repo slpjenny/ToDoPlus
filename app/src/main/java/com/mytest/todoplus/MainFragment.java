@@ -111,21 +111,15 @@ public class MainFragment extends Fragment {
                 if(itemInfo.itemType=="ToDo") {
 
                     //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
-                    todo_edit_dialog td_edit_dlg = new todo_edit_dialog(getContext());
-                    String e_TodoTitle=itemInfo.itemTitle;
-                    String e_TodoTime=itemInfo.itemTime;
-                    String e_TodoPlace=itemInfo.itemPlace;
+                    todo_edit_dlg2 td_edit_dlg2 = new todo_edit_dlg2();
 
-//                    todo_edit_dlg2 two=new todo_edit_dlg2();
-//                    two.show(getFragmentManager().beginTransaction());
+                    Bundle bundle=new Bundle();
+                    bundle.putString("itemTitle",itemInfo.itemTitle);
+                    bundle.putString("itemPlace",itemInfo.itemPlace);
+                    bundle.putString("itemTime",itemInfo.itemTime);
+                    td_edit_dlg2.setArguments(bundle);
 
-
-//                    Intent editTodoIntent= new Intent(getActivity(),todo_edit_dialog.class);
-//                    editTodoIntent.putExtra("dataInfo_title",e_TodoTitle);
-//                    editTodoIntent.putExtra("dataInfo_time",e_TodoTime);
-//                    editTodoIntent.putExtra("dataInfo_place",e_TodoPlace);
-
-                    td_edit_dlg.show();
+                    td_edit_dlg2.show(getFragmentManager(),"show");
 
                 }else if(itemInfo.itemType=="Routine"){
                     routine_edit_dialog rtn_edit_dlg = new routine_edit_dialog(getContext());
