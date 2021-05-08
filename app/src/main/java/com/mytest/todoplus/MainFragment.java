@@ -1,30 +1,18 @@
 package com.mytest.todoplus;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 // 현재 날짜 받아오기
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -111,23 +99,30 @@ public class MainFragment extends Fragment {
                 if(itemInfo.itemType=="ToDo") {
 
                     //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
-                    todo_edit_dlg2 td_edit_dlg2 = new todo_edit_dlg2();
+                    todo_edit_dialog todo_edit_dialog = new todo_edit_dialog();
 
                     Bundle bundle=new Bundle();
                     bundle.putString("itemTitle",itemInfo.itemTitle);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
-                    td_edit_dlg2.setArguments(bundle);
+                    todo_edit_dialog.setArguments(bundle);
 
-                    td_edit_dlg2.show(getFragmentManager(),"show");
+                    todo_edit_dialog.show(getFragmentManager(),"show");
 
                 }else if(itemInfo.itemType=="Routine"){
-                    routine_edit_dialog rtn_edit_dlg = new routine_edit_dialog(getContext());
-                    rtn_edit_dlg.show();
+                    routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
+
+                    Bundle bundle=new Bundle();
+                    bundle.putString("itemTitle",itemInfo.itemTitle);
+                    bundle.putString("itemDay",itemInfo.itemDay);
+                    bundle.putString("itemPlace",itemInfo.itemPlace);
+                    bundle.putString("itemTime",itemInfo.itemTime);
+                    routine_edit_dialog2.setArguments(bundle);
+
+                    routine_edit_dialog2.show(getFragmentManager(),"show");
                 }
             }
         });
-
         return rootView;
     }
 
