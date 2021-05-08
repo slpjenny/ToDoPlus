@@ -93,4 +93,12 @@ public class todo_edit_dialog extends DialogFragment {
         return v;
     }
 
+    public void onResume() {
+        //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
+        int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
+        int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
+        getDialog().getWindow().setLayout(width, height);
+
+        super.onResume();
+    }
 }
