@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dialog_width">383dp</dimen>
+    <dimen name="todo_dialog_width">383dp</dimen>
 </resources>

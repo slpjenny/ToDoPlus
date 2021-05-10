@@ -2,17 +2,22 @@ package com.mytest.todoplus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class todo_add_dialog extends Dialog {
+public class todo_add_dialog extends DialogFragment {
 
     private ImageView todoAdd_cancel;
     private EditText todo_title;
@@ -24,17 +29,24 @@ public class todo_add_dialog extends Dialog {
     static String todo_time_str;
     static String todo_place_str;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public todo_add_dialog(){}
+
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.todo_add_dialog);
+    }
 
-        todo_title=findViewById(R.id.todo_title);
-        todo_time=findViewById(R.id.todo_time);
-        todo_place=findViewById(R.id.todo_place);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        todoAdd_cancel=findViewById(R.id.todoAdd_cancel);
-        todoAdd_ok=findViewById(R.id.todoAdd_ok);
+        View v= inflater.inflate(R.layout.todo_add_dialog, container, false);
+
+        todo_title=v.findViewById(R.id.todo_title);
+        todo_time=v.findViewById(R.id.todo_time);
+        todo_place=v.findViewById(R.id.todo_place);
+
+        todoAdd_cancel=v.findViewById(R.id.todoAdd_cancel);
+        todoAdd_ok=v.findViewById(R.id.todoAdd_ok);
 
         todoAdd_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +70,16 @@ public class todo_add_dialog extends Dialog {
                 dismiss();
             }
         });
-
+        return v;
     }
 
-    public todo_add_dialog(@NonNull Context context) {
-        super(context);
+    public void onResume() {
+        //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
+        int width=getResources().getDimensionPixelSize(R.dimen.todo_dialog_width);
+        int height=getResources().getDimensionPixelSize(R.dimen.todo_dialog_height);
+        getDialog().getWindow().setLayout(width, height);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        super.onResume();
     }
 }

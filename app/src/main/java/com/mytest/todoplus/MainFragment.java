@@ -1,5 +1,7 @@
 package com.mytest.todoplus;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,8 +77,8 @@ public class MainFragment extends Fragment {
         routine_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                routine_add_dialog rtn_dlg = new routine_add_dialog(getContext());
-                rtn_dlg.show();
+                routine_add_dialog rtn_dlg = new routine_add_dialog();
+                rtn_dlg.show(getFragmentManager(),"show");
             }
         });
 
@@ -85,8 +87,8 @@ public class MainFragment extends Fragment {
         todo_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                todo_add_dialog td_dlg = new todo_add_dialog(getContext());
-                td_dlg.show();
+                todo_add_dialog todo_add_dlg = new todo_add_dialog();
+                todo_add_dlg.show(getFragmentManager(),"show");
             }
         });
 

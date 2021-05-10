@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -107,6 +108,7 @@ public class routine_edit_dialog extends DialogFragment {
         int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
         int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
         getDialog().getWindow().setLayout(width, height);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         super.onResume();
     }

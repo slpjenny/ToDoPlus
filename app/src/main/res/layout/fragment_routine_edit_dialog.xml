@@ -141,7 +141,7 @@
         <Button
             android:id="@+id/rtnEdit_remove"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:layout_marginLeft="75dp"
             android:layout_marginTop="20dp"
             android:text="삭제"
@@ -150,7 +150,7 @@
         <Button
             android:id="@+id/rtnEdit_ok"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:text="확인"

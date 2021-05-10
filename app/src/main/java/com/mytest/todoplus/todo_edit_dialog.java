@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -95,9 +96,10 @@ public class todo_edit_dialog extends DialogFragment {
 
     public void onResume() {
         //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
-        int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
-        int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
+        int width=getResources().getDimensionPixelSize(R.dimen.todo_dialog_width);
+        int height=getResources().getDimensionPixelSize(R.dimen.todo_dialog_height);
         getDialog().getWindow().setLayout(width, height);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         super.onResume();
     }
