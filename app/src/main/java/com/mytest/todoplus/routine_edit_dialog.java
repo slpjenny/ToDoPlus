@@ -1,15 +1,17 @@
 package com.mytest.todoplus;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-public class routine_edit_dialog extends Dialog {
+public class routine_edit_dialog extends DialogFragment {
 
     private EditText rtn_title_edit;
     private EditText rtn_day_edit;
@@ -21,23 +23,54 @@ public class routine_edit_dialog extends Dialog {
     private Button rtnEdit_remove;
 
     //각각 editText 부분에 변경되어서 적힐 내용
-    static String rtn_Ename_str;
-    static String rtn_Etime_str;
-    static String rtn_Eplace_str;
+    String rtn_Ename_str;
+    String rtn_Eday_Str;
+    String rtn_Etime_str;
+    String rtn_Eplace_str;
+
+
+    public routine_edit_dialog() {}
+
+//    public static routine_edit_dialog2 newInstance(String param1, String param2) {
+//        routine_edit_dialog2 fragment = new routine_edit_dialog2();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.routine_edit_dialog);
+    }
 
-        rtn_title_edit=findViewById(R.id.rtn_title_edit);
-        rtn_day_edit=findViewById(R.id.rtn_day_edit);
-        rtn_time_edit=findViewById(R.id.rtn_time_edit);
-        rtn_place_edit=findViewById(R.id.rtn_place_edit);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_routine_edit_dialog, container, false);
 
-        rtnEdit_cancel=findViewById(R.id.rtnEdit_cancel);
-        rtnEdit_ok=findViewById(R.id.rtnEdit_ok);
-        rtnEdit_remove=findViewById(R.id.rtnEdit_remove);
+        rtn_title_edit=v.findViewById(R.id.rtn_title_edit);
+        rtn_day_edit=v.findViewById(R.id.rtn_day_edit);
+        rtn_time_edit=v.findViewById(R.id.rtn_time_edit);
+        rtn_place_edit=v.findViewById(R.id.rtn_place_edit);
+
+        rtnEdit_cancel=v.findViewById(R.id.rtnEdit_cancel);
+        rtnEdit_ok=v.findViewById(R.id.rtnEdit_ok);
+        rtnEdit_remove=v.findViewById(R.id.rtnEdit_remove);
+
+        //MainFragment로부터 받은 item 정보 꺼내서 내용수정 전 hint로 알려주기
+        if(getArguments() != null) {
+            rtn_Ename_str = getArguments().getString("itemTitle");
+            rtn_Eday_Str = getArguments().getString("itemDay");
+            rtn_Etime_str = getArguments().getString("itemTime");
+            rtn_Eplace_str = getArguments().getString("itemPlace");
+        }
+
+        rtn_title_edit.setHint(rtn_Ename_str);
+        rtn_day_edit.setHint(rtn_Eday_Str);
+        rtn_time_edit.setHint(rtn_Etime_str);
+        rtn_place_edit.setHint(rtn_Eplace_str);
 
         rtnEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +98,16 @@ public class routine_edit_dialog extends Dialog {
             }
         });
 
-
+        return v;
     }
 
-    public routine_edit_dialog(@NonNull Context context) {
-        super(context);
+    @Override
+    public void onResume() {
+        //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
+        int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
+        int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
+        getDialog().getWindow().setLayout(width, height);
+
+        super.onResume();
     }
 }
