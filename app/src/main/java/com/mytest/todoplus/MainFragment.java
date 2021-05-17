@@ -60,10 +60,6 @@ public class MainFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
-        //recyclerView item 예시
-//        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
-//        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
-
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -107,6 +103,7 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemTitle",itemInfo.itemTitle);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
+                    bundle.putInt("itemPosition",position);
                     todo_edit_dialog.setArguments(bundle);
 
                     todo_edit_dialog.show(getFragmentManager(),"show");
@@ -128,4 +125,10 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        //이거 없으면 리싸이클러 뷰 안나타남
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
 }

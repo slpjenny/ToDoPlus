@@ -19,6 +19,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class todo_add_dialog extends DialogFragment {
 
+    //new
+    public static todoAdapter adapter=new todoAdapter();
+
     private ImageView todoAdd_cancel;
     private EditText todo_title;
     private EditText todo_time;
@@ -63,7 +66,7 @@ public class todo_add_dialog extends DialogFragment {
                 todo_place_str=todo_place.getText().toString();
 
                 todo_object todo_item = new todo_object(todo_title_str,todo_time_str,todo_place_str, R.drawable.green_vertical_line,"ToDo","");
-                todoAdapter.addItem(todo_item);
+                adapter.addItem(todo_item);
 
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 

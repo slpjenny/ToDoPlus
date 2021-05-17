@@ -40,6 +40,13 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>imp
        this.listener=listener;
     }
 
+    public final void removeItem(int position){
+        items.remove(position); //여기까지는 오케이. 리스트에서는 삭제된 것 확실. ui에서 다른게 삭제되고있는 것.
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,items.size());
+//       notifyDataSetChanged();
+    }
+
     @Override
     public void onItemClick(ViewHolder holder, View view, int position) {
         if(listener!=null){

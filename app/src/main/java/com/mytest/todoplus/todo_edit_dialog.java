@@ -14,6 +14,9 @@ import android.widget.ImageView;
 
 public class todo_edit_dialog extends DialogFragment {
 
+    //new
+    public static todoAdapter adapter=new todoAdapter();
+
     private EditText todo_name_edit;
     private EditText todo_time_edit;
     private EditText todo_place_edit;
@@ -26,6 +29,8 @@ public class todo_edit_dialog extends DialogFragment {
     String todo_Ename_str;
     String todo_Etime_str;
     String todo_Eplace_str;
+
+    int position;
 
     public todo_edit_dialog() {}
 
@@ -58,6 +63,7 @@ public class todo_edit_dialog extends DialogFragment {
             todo_Ename_str = getArguments().getString("itemTitle");
             todo_Etime_str = getArguments().getString("itemTime");
             todo_Eplace_str = getArguments().getString("itemPlace");
+            position=getArguments().getInt("itemPosition");
         }
 
         todo_name_edit.setHint(todo_Ename_str);
@@ -77,9 +83,7 @@ public class todo_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
-
-                //이제 해당 아이템을 전달받았다!
-
+                adapter.removeItem(position);
                 //다이얼로그 사라짐.
                 dismiss();
             }
