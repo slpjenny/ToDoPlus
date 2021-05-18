@@ -18,6 +18,9 @@ import androidx.fragment.app.DialogFragment;
 
 public class routine_add_dialog extends DialogFragment {
 
+    //new
+    public static todoAdapter adapter=new todoAdapter();
+
     private EditText rtn_title;
     private EditText rtn_day;
     private EditText rtn_time;
@@ -66,7 +69,7 @@ public class routine_add_dialog extends DialogFragment {
                 rtn_place_str = rtn_place.getText().toString();
 
                 todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", rtn_day_str);
-                todoAdapter.addItem(todo_item);
+                adapter.addItem(todo_item);
 
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 

@@ -54,7 +54,6 @@ public class routine_edit_dialog extends DialogFragment {
         rtnEdit_ok=v.findViewById(R.id.rtnEdit_ok);
         rtnEdit_remove=v.findViewById(R.id.rtnEdit_remove);
 
-        //MainFragment로부터 받은 item 정보 꺼내서 내용수정 전 hint로 알려주기
         if(getArguments() != null) {
             rtn_Ename_str = getArguments().getString("itemTitle");
             rtn_Eday_Str = getArguments().getString("itemDay");
@@ -64,6 +63,7 @@ public class routine_edit_dialog extends DialogFragment {
 
         }
 
+        //원래 써있는 아이템 정보 editText창에 불러오기
         rtn_title_edit.setText(rtn_Ename_str);
         rtn_day_edit.setText(rtn_Eday_Str);
         rtn_time_edit.setText(rtn_Etime_str);
@@ -92,6 +92,15 @@ public class routine_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                String rt_name_e=rtn_title_edit.getText().toString();
+                String rt_day_e=rtn_day_edit.getText().toString();
+                String rt_time_e=rtn_time_edit.getText().toString();
+                String rt_place_e=rtn_place_edit.getText().toString();
+                //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                todo_object rt_o = new todo_object(rt_name_e,rt_time_e,rt_place_e, R.drawable.green_vertical_line,"ToDo",rt_day_e);
+                adapter.editItem(position,rt_o);
+
+                dismiss();
 
             }
         });

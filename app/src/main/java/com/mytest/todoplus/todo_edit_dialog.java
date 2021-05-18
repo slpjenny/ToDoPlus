@@ -66,10 +66,10 @@ public class todo_edit_dialog extends DialogFragment {
             position=getArguments().getInt("itemPosition");
         }
 
+        //원래 써있는 아이템 정보 editText창에 불러오기
         todo_name_edit.setText(todo_Ename_str);
         todo_time_edit.setText(todo_Etime_str);
         todo_place_edit.setText(todo_Eplace_str);
-
 
         todoEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +92,15 @@ public class todo_edit_dialog extends DialogFragment {
         todoEdit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //editText 창에 수정하여 작성한 것 문자열로 변환해놓기
+                String td_name_e=todo_name_edit.getText().toString();
+                String td_time_e=todo_time_edit.getText().toString();
+                String td_place_e=todo_place_edit.getText().toString();
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                todo_object td_o = new todo_object(td_name_e,td_time_e,td_place_e, R.drawable.green_vertical_line,"ToDo","");
+                adapter.editItem(position,td_o);
 
-
+                dismiss();
             }
         });
         return v;
