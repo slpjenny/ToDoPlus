@@ -66,9 +66,9 @@ public class todo_edit_dialog extends DialogFragment {
             position=getArguments().getInt("itemPosition");
         }
 
-        todo_name_edit.setHint(todo_Ename_str);
-        todo_time_edit.setHint(todo_Etime_str);
-        todo_place_edit.setHint(todo_Eplace_str);
+        todo_name_edit.setText(todo_Ename_str);
+        todo_time_edit.setText(todo_Etime_str);
+        todo_place_edit.setText(todo_Eplace_str);
 
 
         todoEdit_cancel.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +93,8 @@ public class todo_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+
+
             }
         });
         return v;
