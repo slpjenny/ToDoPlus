@@ -116,6 +116,7 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemDay",itemInfo.itemDay);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
+                    bundle.putInt("itemPosition",position);
                     routine_edit_dialog2.setArguments(bundle);
 
                     routine_edit_dialog2.show(getFragmentManager(),"show");

@@ -60,7 +60,6 @@ public class routine_edit_dialog extends DialogFragment {
             rtn_Etime_str = getArguments().getString("itemTime");
             rtn_Eplace_str = getArguments().getString("itemPlace");
             position=getArguments().getInt("itemPosition");
-
         }
 
         //원래 써있는 아이템 정보 editText창에 불러오기
@@ -82,7 +81,6 @@ public class routine_edit_dialog extends DialogFragment {
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
                 adapter.removeItem(position);
-
                 //다이얼로그 사라짐.
                 dismiss();
             }
@@ -97,14 +95,13 @@ public class routine_edit_dialog extends DialogFragment {
                 String rt_time_e=rtn_time_edit.getText().toString();
                 String rt_place_e=rtn_place_edit.getText().toString();
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
-                todo_object rt_o = new todo_object(rt_name_e,rt_time_e,rt_place_e, R.drawable.green_vertical_line,"ToDo",rt_day_e);
+                todo_object rt_o = new todo_object(rt_name_e,rt_time_e,rt_place_e, R.drawable.yellow_vertical_line,"Routine",rt_day_e);
                 adapter.editItem(position,rt_o);
 
                 dismiss();
 
             }
         });
-
         return v;
     }
 
