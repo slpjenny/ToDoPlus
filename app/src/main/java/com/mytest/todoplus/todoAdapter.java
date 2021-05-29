@@ -48,15 +48,8 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder>imp
     }
 
     public final void editItem(int position,todo_object td_o){
-        items.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,items.size());
-//        notifyDataSetChanged();
-       //해당 아이템을 삭제하고, 해당 인덱스에 새로바뀐 아이템을 집어넣는다.
-        items.add(position,td_o);
-        notifyItemRangeInserted(position,items.size());
-        notifyItemRangeChanged(position,items.size());
-//        notifyDataSetChanged();
+       items.set(position,td_o);
+       notifyItemChanged(position);
     }
 
     @Override
