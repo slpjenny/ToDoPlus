@@ -40,4 +40,7 @@ dependencies {
 
     //상단,하단 바 만들기
     implementation 'com.google.android.material:material:1.0.0'
+
+    // 캘린더 LocalDate.now() 사용하려고 추가함
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.0'
 }
