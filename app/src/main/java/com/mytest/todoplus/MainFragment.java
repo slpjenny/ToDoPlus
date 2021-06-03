@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,7 @@ public class MainFragment extends Fragment {
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static todoAdapter adapter=new todoAdapter();
+    private ItemTouchHelper mItemTouchHelper;
 
 
     public MainFragment() {
@@ -63,6 +66,9 @@ public class MainFragment extends Fragment {
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
+        mItemTouchHelper=new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
 
         // 오늘 날짜 표시
         TextView textView=rootView.findViewById(R.id.showDate);
@@ -131,5 +137,10 @@ public class MainFragment extends Fragment {
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         super.onResume();
+    }
+
+    private void refresh(){
+        FragmentTransaction ft=getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 }
