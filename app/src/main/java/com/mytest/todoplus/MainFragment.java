@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -91,6 +92,7 @@ public class MainFragment extends Fragment {
             public void onClick(View view) {
                 todo_add_dialog todo_add_dlg = new todo_add_dialog();
                 todo_add_dlg.show(getFragmentManager(),"show");
+
             }
         });
 
@@ -114,7 +116,7 @@ public class MainFragment extends Fragment {
 
                     todo_edit_dialog.show(getFragmentManager(),"show");
 
-                }else if(itemInfo.itemType=="Routine"){
+                }else if (itemInfo.itemType=="Routine"){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
 
                     Bundle bundle=new Bundle();
@@ -132,15 +134,14 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        //이거 없으면 리싸이클러 뷰 안나타남
-        adapter.notifyDataSetChanged();
-        super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//        //이거 없으면 리싸이클러 뷰 안나타남
+//        adapter.notifyDataSetChanged();
+//        super.onResume();
+//    }
 
-    private void refresh(){
-        FragmentTransaction ft=getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
+    static public void refresh(){
+        adapter.notifyDataSetChanged();
     }
 }
