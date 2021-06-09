@@ -11,7 +11,8 @@
         android:theme="@style/Theme.ToDoPlus">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:configChanges="orientation|keyboardHidden|screenSize"/> <!--화면 전환시 onCreate 호출 방지, Android 4.0 이후부터 추가 필요 -->
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

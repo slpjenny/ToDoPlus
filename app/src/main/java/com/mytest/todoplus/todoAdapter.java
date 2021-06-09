@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     //배열 리스트 items에 새로운 item 객체 추가하기기
     public static void addItem(todo_object item) {
         items.add(item);
+        MainFragment.refresh();
     }
 //   public static void
 
@@ -52,6 +54,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     public final void editItem(int position, todo_object td_o) {
         items.set(position, td_o);
         notifyItemChanged(position);
+        MainFragment.refresh();
     }
 
     @Override
@@ -65,7 +68,9 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull todoAdapter.ViewHolder holder, int position) {
 //        todo_object item = items.get(position);
 //        ViewHolder.setItem(item);
+        holder.setIsRecyclable(false);
         holder.onBind(items.get(position),position);
+
     }
 
     @Override
@@ -95,6 +100,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         static ImageView item_line;
         static TextView item_type;
         static TextView item_day;
+
 
         public ViewHolder(View itemView, OnToDoItemClickListener listener) {
             super(itemView);
@@ -140,4 +146,5 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item.setNumber(position);
         }
     }
+
 }
