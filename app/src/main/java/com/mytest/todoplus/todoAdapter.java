@@ -22,7 +22,6 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         items.add(item);
         MainFragment.refresh();
     }
-//   public static void
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -48,7 +47,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         items.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
-//       notifyDataSetChanged();
+        MainFragment.refresh();
     }
 
     public final void editItem(int position, todo_object td_o) {
