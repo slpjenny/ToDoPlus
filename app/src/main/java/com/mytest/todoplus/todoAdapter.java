@@ -3,6 +3,7 @@ package com.mytest.todoplus;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +49,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         items.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
-//       notifyDataSetChanged();
+        MainFragment.refresh();
     }
 
     public final void editItem(int position, todo_object td_o) {
@@ -68,6 +69,24 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull todoAdapter.ViewHolder holder, int position) {
 //        todo_object item = items.get(position);
 //        ViewHolder.setItem(item);
+//
+//        final int pos=position;
+//        holder.checkbox.setSelected(items.get(pos).isSelected);
+//        holder.checkBox.setTag(items.get(pos));
+//
+//        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CheckBox cb=(CheckBox) view;
+//                todo_object td =(todo_object)cb.getTag();
+//
+//                td.setSelected(cb.isChecked());
+//                todo_object.get(pos).setSelected(cb.isChecked());
+//
+//            }
+//        });
+
+        //뷰 재사용을 막고, 계속 새로운 아이템을 생성하여 데이터 꼬임 문제 해결.
         holder.setIsRecyclable(false);
         holder.onBind(items.get(position),position);
 
@@ -101,6 +120,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         static TextView item_type;
         static TextView item_day;
 
+        static CheckBox checkBox;
 
         public ViewHolder(View itemView, OnToDoItemClickListener listener) {
             super(itemView);
@@ -111,6 +131,8 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_line = itemView.findViewById(R.id.item_line);
             item_type = itemView.findViewById(R.id.item_type);
             item_day = itemView.findViewById(R.id.item_day);
+
+//            checkBox=itemView.findViewById(R.id.checkbox);
 
 
             //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.***
