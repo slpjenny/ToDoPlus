@@ -10,6 +10,9 @@ public class todo_object {
     String itemType;
     int number;
 
+    //체크박스 체크 상태
+    boolean isSelected;
+
     //루틴에만 들어가는 요소
     String itemDay;
 
@@ -44,8 +47,10 @@ public class todo_object {
     public int getNumber() {
         return number;
     }
-
     public void setNumber(int number) {
         this.number = number;
     }
+
+    public boolean isSelected() {return isSelected; }
+    public void setSelected(boolean selected) { isSelected = selected; }
 }
