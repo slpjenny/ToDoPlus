@@ -134,13 +134,6 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
-//    @Override
-//    public void onResume() {
-//        //이거 없으면 리싸이클러 뷰 안나타남
-//        adapter.notifyDataSetChanged();
-//        super.onResume();
-//    }
-
     static public void refresh(){
         adapter.notifyDataSetChanged();
     }

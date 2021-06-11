@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

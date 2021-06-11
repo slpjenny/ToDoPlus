@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +24,6 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         items.add(item);
         MainFragment.refresh();
     }
-//   public static void
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -67,24 +67,22 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull todoAdapter.ViewHolder holder, int position) {
-//        todo_object item = items.get(position);
-//        ViewHolder.setItem(item);
-//
-//        final int pos=position;
-//        holder.checkbox.setSelected(items.get(pos).isSelected);
-//        holder.checkBox.setTag(items.get(pos));
-//
-//        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CheckBox cb=(CheckBox) view;
-//                todo_object td =(todo_object)cb.getTag();
-//
-//                td.setSelected(cb.isChecked());
-//                todo_object.get(pos).setSelected(cb.isChecked());
-//
-//            }
-//        });
+        final todo_object item = items.get(position);
+
+        //우선 초기화 후에 뒤에서 setChecked와 리스너 사용
+        holder.checkBox.setOnCheckedChangeListener(null);
+        //true 면 체크되어있음
+        //체크값을 읽어 체크박스값을 초기화해준뒤, 사용자가 체크할 값에 대해
+        holder.checkBox.setChecked(item.isSelected());
+
+        //체크 이벤트를 달아서 setSelected를 해줌으로써 체크를 할 수 있게 한다.
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                //체크박스의 가장 마지막 상태 저장
+                item.setSelected(isChecked);
+            }
+        });
 
         //뷰 재사용을 막고, 계속 새로운 아이템을 생성하여 데이터 꼬임 문제 해결.
         holder.setIsRecyclable(false);
@@ -132,7 +130,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_type = itemView.findViewById(R.id.item_type);
             item_day = itemView.findViewById(R.id.item_day);
 
-//            checkBox=itemView.findViewById(R.id.checkbox);
+            checkBox=itemView.findViewById(R.id.checkbox);
 
 
             //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.***
@@ -146,6 +144,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
                     }
                 }
             });
+
         }
 
         public static void setItem(todo_object item) {
@@ -166,6 +165,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_day.setText(item.getItemDay());
 
             item.setNumber(position);
+
         }
     }
 
