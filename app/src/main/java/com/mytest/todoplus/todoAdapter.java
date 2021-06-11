@@ -69,17 +69,18 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull todoAdapter.ViewHolder holder, int position) {
         final todo_object item = items.get(position);
 
-        //우선 초기화 후에 뒤에서 setChecked와 리스너 사용
+        //checkbox 상태변화있을시 불리는 리스너 초기화 **
         holder.checkBox.setOnCheckedChangeListener(null);
-        //true 면 체크되어있음
-        //체크값을 읽어 체크박스값을 초기화해준뒤, 사용자가 체크할 값에 대해
+
+        //현재 item의 체크 상태 여부를 읽어 체크박스값을 초기화해준다.
         holder.checkBox.setChecked(item.isSelected());
 
-        //체크 이벤트를 달아서 setSelected를 해줌으로써 체크를 할 수 있게 한다.
+        //체크상태가 달라질 때 불려지는 리스너
+        //사용자가 체크할 값에 대해 체크 이벤트를 달아서 setSelected를 해줌으로써 체크를 할 수 있게 한다.
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                //체크박스의 가장 마지막 상태 저장
+                //체크박스의 가장 마지막 상태 저장한 것을 불러온다
                 item.setSelected(isChecked);
             }
         });
