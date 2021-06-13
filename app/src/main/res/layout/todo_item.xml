@@ -20,10 +20,11 @@
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkbox"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_marginRight="10dp"
-                android:buttonTint="#FFFFFF"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
                 android:checked="false">
 
             </androidx.appcompat.widget.AppCompatCheckBox>
