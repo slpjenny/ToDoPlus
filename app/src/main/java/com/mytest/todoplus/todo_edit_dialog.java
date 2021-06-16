@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class todo_edit_dialog extends DialogFragment {
+
+    //new
+    public static todoAdapter adapter=new todoAdapter();
 
     private EditText todo_name_edit;
     private EditText todo_time_edit;
@@ -26,6 +30,8 @@ public class todo_edit_dialog extends DialogFragment {
     String todo_Etime_str;
     String todo_Eplace_str;
 
+    int position;
+
     public todo_edit_dialog() {}
 
     public static todo_edit_dialog getInstance() {
@@ -34,10 +40,7 @@ public class todo_edit_dialog extends DialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,12 +60,13 @@ public class todo_edit_dialog extends DialogFragment {
             todo_Ename_str = getArguments().getString("itemTitle");
             todo_Etime_str = getArguments().getString("itemTime");
             todo_Eplace_str = getArguments().getString("itemPlace");
+            position=getArguments().getInt("itemPosition");
         }
 
-        todo_name_edit.setHint(todo_Ename_str);
-        todo_time_edit.setHint(todo_Etime_str);
-        todo_place_edit.setHint(todo_Eplace_str);
-
+        //원래 써있는 아이템 정보 editText창에 불러오기
+        todo_name_edit.setText(todo_Ename_str);
+        todo_time_edit.setText(todo_Etime_str);
+        todo_place_edit.setText(todo_Eplace_str);
 
         todoEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +80,7 @@ public class todo_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
-
-                //이제 해당 아이템을 전달받았다!
-
+                adapter.removeItem(position);
                 //다이얼로그 사라짐.
                 dismiss();
             }
@@ -87,7 +89,15 @@ public class todo_edit_dialog extends DialogFragment {
         todoEdit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //editText 창에 수정하여 작성한 것 문자열로 변환해놓기
+                String td_name_e=todo_name_edit.getText().toString();
+                String td_time_e=todo_time_edit.getText().toString();
+                String td_place_e=todo_place_edit.getText().toString();
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                todo_object td_o = new todo_object(td_name_e,td_time_e,td_place_e, R.drawable.green_vertical_line,"ToDo","");
+                adapter.editItem(position,td_o);
+
+                dismiss();
             }
         });
         return v;
@@ -95,9 +105,10 @@ public class todo_edit_dialog extends DialogFragment {
 
     public void onResume() {
         //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
-        int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
-        int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
+        int width=getResources().getDimensionPixelSize(R.dimen.todo_dialog_width);
+        int height=getResources().getDimensionPixelSize(R.dimen.todo_dialog_height);
         getDialog().getWindow().setLayout(width, height);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         super.onResume();
     }

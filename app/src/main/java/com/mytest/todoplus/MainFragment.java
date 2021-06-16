@@ -1,8 +1,13 @@
 package com.mytest.todoplus;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +27,7 @@ public class MainFragment extends Fragment {
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static todoAdapter adapter=new todoAdapter();
+    private ItemTouchHelper mItemTouchHelper;
 
 
     public MainFragment() {
@@ -58,13 +64,12 @@ public class MainFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
-        //recyclerView item 예시
-//        adapter.addItem(new todo_object("지영이랑 안드로이드","10:22","zoom", R.drawable.green_vertical_line,"Todo"));
-//        adapter.addItem(new todo_object("이거는 루틴예시","03:19","595",R.drawable.yellow_vertical_line,"Routine"));
-
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
+        mItemTouchHelper=new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
 
         // 오늘 날짜 표시
         TextView textView=rootView.findViewById(R.id.showDate);
@@ -75,8 +80,8 @@ public class MainFragment extends Fragment {
         routine_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                routine_add_dialog rtn_dlg = new routine_add_dialog(getContext());
-                rtn_dlg.show();
+                routine_add_dialog rtn_dlg = new routine_add_dialog();
+                rtn_dlg.show(getFragmentManager(),"show");
             }
         });
 
@@ -85,8 +90,9 @@ public class MainFragment extends Fragment {
         todo_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                todo_add_dialog td_dlg = new todo_add_dialog(getContext());
-                td_dlg.show();
+                todo_add_dialog todo_add_dlg = new todo_add_dialog();
+                todo_add_dlg.show(getFragmentManager(),"show");
+
             }
         });
 
@@ -105,11 +111,12 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemTitle",itemInfo.itemTitle);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
+                    bundle.putInt("itemPosition",position);
                     todo_edit_dialog.setArguments(bundle);
 
                     todo_edit_dialog.show(getFragmentManager(),"show");
 
-                }else if(itemInfo.itemType=="Routine"){
+                }else if (itemInfo.itemType=="Routine"){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
 
                     Bundle bundle=new Bundle();
@@ -117,6 +124,7 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemDay",itemInfo.itemDay);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
+                    bundle.putInt("itemPosition",position);
                     routine_edit_dialog2.setArguments(bundle);
 
                     routine_edit_dialog2.show(getFragmentManager(),"show");
@@ -126,4 +134,7 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    static public void refresh(){
+        adapter.notifyDataSetChanged();
+    }
 }

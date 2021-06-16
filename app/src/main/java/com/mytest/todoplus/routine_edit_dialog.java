@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class routine_edit_dialog extends DialogFragment {
+
+    //new
+    public static todoAdapter adapter=new todoAdapter();
 
     private EditText rtn_title_edit;
     private EditText rtn_day_edit;
@@ -28,18 +32,9 @@ public class routine_edit_dialog extends DialogFragment {
     String rtn_Etime_str;
     String rtn_Eplace_str;
 
+    int position;
 
     public routine_edit_dialog() {}
-
-//    public static routine_edit_dialog2 newInstance(String param1, String param2) {
-//        routine_edit_dialog2 fragment = new routine_edit_dialog2();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,18 +54,19 @@ public class routine_edit_dialog extends DialogFragment {
         rtnEdit_ok=v.findViewById(R.id.rtnEdit_ok);
         rtnEdit_remove=v.findViewById(R.id.rtnEdit_remove);
 
-        //MainFragment로부터 받은 item 정보 꺼내서 내용수정 전 hint로 알려주기
         if(getArguments() != null) {
             rtn_Ename_str = getArguments().getString("itemTitle");
             rtn_Eday_Str = getArguments().getString("itemDay");
             rtn_Etime_str = getArguments().getString("itemTime");
             rtn_Eplace_str = getArguments().getString("itemPlace");
+            position=getArguments().getInt("itemPosition");
         }
 
-        rtn_title_edit.setHint(rtn_Ename_str);
-        rtn_day_edit.setHint(rtn_Eday_Str);
-        rtn_time_edit.setHint(rtn_Etime_str);
-        rtn_place_edit.setHint(rtn_Eplace_str);
+        //원래 써있는 아이템 정보 editText창에 불러오기
+        rtn_title_edit.setText(rtn_Ename_str);
+        rtn_day_edit.setText(rtn_Eday_Str);
+        rtn_time_edit.setText(rtn_Etime_str);
+        rtn_place_edit.setText(rtn_Eplace_str);
 
         rtnEdit_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +80,7 @@ public class routine_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
-
-
+                adapter.removeItem(position);
                 //다이얼로그 사라짐.
                 dismiss();
             }
@@ -95,9 +90,18 @@ public class routine_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                String rt_name_e=rtn_title_edit.getText().toString();
+                String rt_day_e=rtn_day_edit.getText().toString();
+                String rt_time_e=rtn_time_edit.getText().toString();
+                String rt_place_e=rtn_place_edit.getText().toString();
+                //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                todo_object rt_o = new todo_object(rt_name_e,rt_time_e,rt_place_e, R.drawable.yellow_vertical_line,"Routine",rt_day_e);
+                adapter.editItem(position,rt_o);
+
+                dismiss();
+
             }
         });
-
         return v;
     }
 
@@ -107,6 +111,7 @@ public class routine_edit_dialog extends DialogFragment {
         int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
         int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
         getDialog().getWindow().setLayout(width, height);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         super.onResume();
     }

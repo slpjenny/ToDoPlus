@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     Menu menu;
 
+    MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +37,21 @@ public class MainActivity extends AppCompatActivity {
         pager.setOffscreenPageLimit(3);
 
         //getSupportFragmentManager로 프래그먼트 참조가능
-        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
+//        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
 
         //뷰 페이저의 1번째 페이지='달력'
         calendar_fragment= new Calendar_Fragment();
-        adapter.addItem(calendar_fragment);
+        mpadapter.addItem(calendar_fragment);
 
         //뷰 페이저의 2번째 페이지='투두'(메인)
         main_fragment = new MainFragment();
-        adapter.addItem(main_fragment);
+        mpadapter.addItem(main_fragment);
 
         //뷰 페이저의 3번째 페이지='루틴'
         routine_fragment = new Routine_Fragment();
-        adapter.addItem(routine_fragment);
+        mpadapter.addItem(routine_fragment);
 
-        pager.setAdapter(adapter);
+        pager.setAdapter(mpadapter);
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
@@ -75,22 +77,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                bottomNavigationView.getMenu().getItem(position).isChecked();
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            //현재 페이지가 몇번째인지 확인해준다.
+            public void onPageSelected(int position) {
+                bottomNavigationView.getMenu().getItem(position).isChecked();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     //어댑터 안에서 각각의 아이템(프라그먼트 페이지들)을 데이터로서 관리한다
@@ -116,5 +120,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
 
+        MainFragment.refresh();
+    }
 }
