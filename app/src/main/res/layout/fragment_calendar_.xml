@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -30,8 +30,9 @@
             android:id="@+id/year"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center|left"
+            android:layout_marginLeft="10dp"
             android:paddingTop="10dp"
             android:text="2021"
             android:textColor="#C0C0C0"
@@ -41,11 +42,11 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="2dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_height="18dp"
             android:layout_weight="1"
-            tools:src="@drawable/calendar_achievement" />
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/calendar_achievement" />
 
         <TextView
             android:id="@+id/textView7"
@@ -56,10 +57,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="359dp"
-        android:layout_height="341dp"
+        android:layout_width="318dp"
+        android:layout_height="318dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/calendar_border"
         android:orientation="vertical">
 
@@ -67,8 +68,8 @@
             android:layout_width="321dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView8"
@@ -136,28 +137,30 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendarRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="341dp" />
+            android:layout_width="318dp"
+            android:layout_height="310dp"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="318dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/plusMemo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginLeft="280dp"
+            android:layout_marginLeft="220dp"
             android:background="@drawable/plus_btn_large" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="280dp"
+            android:layout_marginLeft="220dp"
             android:layout_marginTop="8dp"
             android:text="메모 추가"
             android:textSize="20sp"

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,34 +73,65 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         //토스트 때문에 추가함
         context = container.getContext();
 
+        // 이전, 이후 달력 스와이프
+        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
+            public void onSwipeTop() {
+            }
+            public void onSwipeRight() {
+                selectedDate = selectedDate.minusMonths(1);
+                setMonthView();
+            }
+            public void onSwipeLeft() {
+                selectedDate = selectedDate.plusMonths(1);
+                setMonthView();
+            }
+            public void onSwipeBottom() {
+            }
+        });
 
         return rootView;
     }
 
     private void setMonthView() {
+        // month, year text에 맞는 데이터로 설정하기
         monthText.setText(monthFromDate(selectedDate));
         yearText.setText(yearFromDate(selectedDate));
+
+        // 그 달의 날짜들을 담고 있는 배열 daysInMonth
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
+
+        // calenderRecyclerView에 레이아웃 매니저와 어댑터 설정
         calenderRecyclerView.setLayoutManager(layoutManager);
         calenderRecyclerView.setAdapter(calendarAdapter);
 
     }
 
+    // 그 달의 날짜들을 담고 있는 배열을 만들어주는 함수
     private ArrayList<String> daysInMonthArray(LocalDate date)
     {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
+
+        // 현재 날짜의 년도와 달을 yearMonth 변수에 저장
         YearMonth yearMonth = YearMonth.from(date);
 
+        // 현재 달의 길이를 daysInMonth 변수에 저장
         int daysInMonth = yearMonth.lengthOfMonth();
+
+        // withDayofMonth(int n) 그 달의 n번째 날을 가져옴
         LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+
+        // getDayofWeek: 요일(문자)을 반환하는 함수(각 요일은 int값이 있음 from 1 (Monday) to 7 (Sunday))
+        // dayOfWeek 변수에 그 달의 첫 번째 날의 요일의 int값을 저장
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for (int i=1 ; i <=42; i++)
+        // 반복문으로 그 달의 날짜 배열 만들기
+        for (int i=2 ; i <=42; i++)
         {
-            if(i <= dayOfWeek || i>daysInMonth + dayOfWeek)
+            // 
+            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
             {
                 daysInMonthArray.add("");
             }
@@ -108,6 +140,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
                 daysInMonthArray.add(String.valueOf(i-dayOfWeek));
             }
         }
+        // 배열 반환
         return daysInMonthArray;
     }
 
