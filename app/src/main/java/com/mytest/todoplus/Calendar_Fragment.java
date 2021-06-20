@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         return fragment;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
