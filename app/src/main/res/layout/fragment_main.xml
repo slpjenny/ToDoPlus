@@ -44,13 +44,13 @@
     <!-- 투두/루틴 리스트들 들어갈 자리-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="397dp"
+        android:layout_height="410dp"
         android:layout_marginTop="25dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="370dp"
-            android:layout_height="375dp"
+            android:layout_height="400dp"
             android:layout_marginLeft="23dp" />
 
     </LinearLayout>
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="79dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="5dp">
 
         <Button
             android:id="@+id/routine_add_btn"

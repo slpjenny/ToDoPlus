@@ -1,25 +1,21 @@
 package com.mytest.todoplus;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-// 현재 날짜 받아오기
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+// 현재 날짜 받아오기
 
 public class MainFragment extends Fragment {
 
@@ -81,7 +77,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 routine_add_dialog rtn_dlg = new routine_add_dialog();
-                rtn_dlg.show(getFragmentManager(),"show");
+                rtn_dlg.show(getParentFragmentManager(),"show");
             }
         });
 
@@ -91,7 +87,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 todo_add_dialog todo_add_dlg = new todo_add_dialog();
-                todo_add_dlg.show(getFragmentManager(),"show");
+                todo_add_dlg.show(getParentFragmentManager(),"show");
 
             }
         });
@@ -114,7 +110,7 @@ public class MainFragment extends Fragment {
                     bundle.putInt("itemPosition",position);
                     todo_edit_dialog.setArguments(bundle);
 
-                    todo_edit_dialog.show(getFragmentManager(),"show");
+                    todo_edit_dialog.show(getParentFragmentManager(),"show");
 
                 }else if (itemInfo.itemType=="Routine"){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
@@ -127,7 +123,7 @@ public class MainFragment extends Fragment {
                     bundle.putInt("itemPosition",position);
                     routine_edit_dialog2.setArguments(bundle);
 
-                    routine_edit_dialog2.show(getFragmentManager(),"show");
+                    routine_edit_dialog2.show(getParentFragmentManager(),"show");
                 }
             }
         });

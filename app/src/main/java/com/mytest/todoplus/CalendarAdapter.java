@@ -7,12 +7,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.threeten.bp.LocalDate;
+
 import java.util.ArrayList;
+
+//------------
+
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<String> daysOfMonth;
     private final OnItemListener onItemListener;
+    public static LocalDate selectedDate;
+//    public static RecyclerView calenderRecyclerView;
+
 
     public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener)
     {
@@ -47,4 +55,15 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     {
         void onItemClick(int position, String dayText);
     }
+
+
+    public void onSwipeRight(){
+        selectedDate=selectedDate.minusMonths(1);
+
+    }
+
+    public void setMonthView(){
+
+    }
+
 }
