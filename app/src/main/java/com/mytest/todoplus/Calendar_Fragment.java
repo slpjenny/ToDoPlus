@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -62,6 +63,26 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
             }
         });
 
+        Button backButton = (Button) rootView.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                previousMonthAction(v);
+            }
+        });
+
+        Button nextButton = (Button) rootView.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                nextMonthAction(v);
+            }
+        });
+
 
         // initWidgets()
         // XML에 있는 리사이클러뷰랑 연결
@@ -75,21 +96,21 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         //토스트 때문에 추가함
         context = container.getContext();
 
-        // 이전, 이후 달력 스와이프
-        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
-            public void onSwipeTop() {
-            }
-            public void onSwipeRight() {
-                selectedDate = selectedDate.minusMonths(1);
-                setMonthView();
-            }
-            public void onSwipeLeft() {
-                selectedDate = selectedDate.plusMonths(1);
-                setMonthView();
-            }
-            public void onSwipeBottom() {
-            }
-        });
+//        // 이전, 이후 달력 스와이프
+//        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
+//            public void onSwipeTop() {
+//            }
+//            public void onSwipeRight() {
+//                selectedDate = selectedDate.minusMonths(1);
+//                setMonthView();
+//            }
+//            public void onSwipeLeft() {
+//                selectedDate = selectedDate.plusMonths(1);
+//                setMonthView();
+//            }
+//            public void onSwipeBottom() {
+//            }
+//        });
 
         return rootView;
     }
@@ -179,6 +200,8 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
 
         if(dayText.equals(""))
         {
+
+        } else {
             String message = "Selected Date" +dayText + " " + monthFromDate(selectedDate);
             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
