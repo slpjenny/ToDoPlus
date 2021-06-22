@@ -59,7 +59,7 @@
 
     <LinearLayout
         android:layout_width="370dp"
-        android:layout_height="370dp"
+        android:layout_height="420dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/calendar_border"
@@ -159,17 +159,44 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="2dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text= "b"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="n"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+       </LinearLayout>
 
         <ImageView
             android:id="@+id/plusMemo"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginTop="-50dp"
             android:layout_marginLeft="260dp"
             android:background="@drawable/plus_btn_large" />
 
