@@ -1,7 +1,5 @@
 package com.mytest.todoplus;
 
-import android.widget.ImageView;
-
 public class todo_object {
     String itemTitle;
     String itemTime;
@@ -11,6 +9,7 @@ public class todo_object {
     int number;
 
     //체크박스 체크 상태
+    //boolean 의 초기화 하기 전 값-> false
     boolean isSelected;
 
     //루틴에만 들어가는 요소

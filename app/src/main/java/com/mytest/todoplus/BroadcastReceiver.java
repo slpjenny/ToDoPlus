@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class BroadcastReceiver extends android.content.BroadcastReceiver {
-    public static todoAdapter adapter = new todoAdapter();
+//    public static todoAdapter adapter = new todoAdapter();
 
     @Override
     public void onReceive(Context context, Intent intent) {
