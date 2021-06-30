@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -73,14 +72,15 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         holder.checkBox.setOnCheckedChangeListener(null);
 
         //현재 item의 체크 상태 여부를 읽어 체크박스값을 초기화해준다.
+        //모델 클래스의 getter로 체크 상태값을 가져온 다음, setter를 통해 이 값을 아이템 안의 체크박스에 set한다
         holder.checkBox.setChecked(item.isSelected());
 
         //체크상태가 달라질 때 불려지는 리스너
-        //사용자가 체크할 값에 대해 체크 이벤트를 달아서 setSelected를 해줌으로써 체크를 할 수 있게 한다.
+        //사용자가 체크할 값에 대해 체크 이벤트를 달아서 이전에 저장된 isChecked 값을 불러온다
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                //체크박스의 가장 마지막 상태 저장한 것을 불러온다
+
                 item.setSelected(isChecked);
             }
         });

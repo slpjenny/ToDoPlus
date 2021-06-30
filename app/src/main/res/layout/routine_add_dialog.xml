@@ -76,14 +76,126 @@
             android:textColor="#232323"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/rtn_day"
+        <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
+            android:layout_height="45dp"
+            android:orientation="vertical"
             android:layout_marginLeft="60dp"
-            android:background="@drawable/edittext_blank" />
+            android:layout_gravity="center"
+            android:background="@drawable/edittext_blank">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/checkM"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkTu"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkW"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkTh"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkF"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkSa"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="6dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+                <CheckBox
+                    android:id="@+id/checkSu"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginRight="64dp"
+                    android:button="@null"
+                    android:background="@drawable/custom_date_checkbox"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="월"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="화"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="수"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="목"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="금"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="토"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="일"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -27,7 +27,6 @@ public class routine_add_dialog extends DialogFragment {
     public static todoAdapter adapter=new todoAdapter();
 
     private EditText rtn_title;
-    public static TextView rtn_day;
     private static TextView rtn_time;
     private EditText rtn_place;
 
@@ -51,7 +50,6 @@ public class routine_add_dialog extends DialogFragment {
         View v = inflater.inflate(R.layout.routine_add_dialog, container, false);
 
         rtn_title = v.findViewById(R.id.rtn_title);
-        rtn_day = v.findViewById(R.id.rtn_day);
         rtn_time = v.findViewById(R.id.rtn_time);
         rtn_place = v.findViewById(R.id.rtn_place);
 
@@ -69,11 +67,12 @@ public class routine_add_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 rtn_title_str = rtn_title.getText().toString();
-                rtn_day_str = rtn_day.getText().toString();
+                //체크된 요일 출력
+//                rtn_day_str = rtn_day.getText().toString();
                 rtn_time_str = rtn_time.getText().toString();
                 rtn_place_str = rtn_place.getText().toString();
 
-                todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", rtn_day_str);
+                todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", "rtnDay");
                 adapter.addItem(todo_item);
 
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
