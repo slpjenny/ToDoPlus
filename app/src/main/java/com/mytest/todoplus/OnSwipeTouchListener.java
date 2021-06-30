@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.content.Context;
 
+import android.util.Log;
 import android.view.GestureDetector;
 
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -71,6 +72,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
                         if (diffX > 0) {
 
                             onSwipeRight();
+                            Log.d("swipe","swipeRight");
 
                         } else {
 
@@ -87,10 +89,12 @@ public class OnSwipeTouchListener implements OnTouchListener {
                     if (diffY > 0) {
 
                         onSwipeBottom();
+                        Log.d("swipe","swipeBottom");
 
                     } else {
 
                         onSwipeTop();
+                        Log.d("swipe","swipeTop");
 
                     }
 
@@ -109,7 +113,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
         }
 
     }
-
 
 
     public void onSwipeRight() { }

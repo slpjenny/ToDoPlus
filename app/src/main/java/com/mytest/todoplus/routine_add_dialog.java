@@ -1,20 +1,25 @@
 package com.mytest.todoplus;
 
 import android.app.Dialog;
-import android.content.Context;
+import android.app.TimePickerDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import java.util.Calendar;
 
 public class routine_add_dialog extends DialogFragment {
 
@@ -22,8 +27,8 @@ public class routine_add_dialog extends DialogFragment {
     public static todoAdapter adapter=new todoAdapter();
 
     private EditText rtn_title;
-    private EditText rtn_day;
-    private EditText rtn_time;
+    public static TextView rtn_day;
+    private static TextView rtn_time;
     private EditText rtn_place;
 
     private ImageView rtn_cancel;
@@ -76,6 +81,15 @@ public class routine_add_dialog extends DialogFragment {
                 dismiss();
             }
         });
+
+        rtn_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerFragment tpk=new TimePickerFragment();
+                tpk.show(getFragmentManager(),"tpk");
+            }
+        });
+
         return v;
     }
 
@@ -87,5 +101,27 @@ public class routine_add_dialog extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         super.onResume();
+    }
+
+    //시간 설정
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+            rtn_time.setText(hourOfDay+":"+minute);
+        }
     }
 }
