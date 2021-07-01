@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
@@ -53,7 +53,7 @@
         <EditText
             android:id="@+id/rtn_title"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:background="@drawable/edittext_blank" />
@@ -62,7 +62,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
@@ -78,7 +78,7 @@
 
         <LinearLayout
             android:layout_width="200dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_marginLeft="60dp"
             android:layout_gravity="center"
@@ -200,7 +200,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
@@ -217,7 +217,7 @@
         <TextView
             android:id="@+id/rtn_time"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="60dp"
             android:background="@drawable/edittext_blank" />
@@ -226,7 +226,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
@@ -243,7 +243,7 @@
         <EditText
             android:id="@+id/rtn_place"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="60dp"
             android:background="@drawable/edittext_blank" />

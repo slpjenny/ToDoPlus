@@ -24,7 +24,7 @@ public class routine_edit_dialog extends DialogFragment {
     public static todoAdapter adapter = new todoAdapter();
 
     private EditText rtn_title_edit;
-    private EditText rtn_day_edit;
+//    private EditText rtn_day_edit;
     public static TextView rtn_time_edit;
     private EditText rtn_place_edit;
 
@@ -54,7 +54,7 @@ public class routine_edit_dialog extends DialogFragment {
         View v = inflater.inflate(R.layout.fragment_routine_edit_dialog, container, false);
 
         rtn_title_edit = v.findViewById(R.id.rtn_title_edit);
-        rtn_day_edit = v.findViewById(R.id.rtn_day_edit);
+//        rtn_day_edit = v.findViewById(R.id.rtn_day_edit);
         rtn_time_edit = v.findViewById(R.id.rtn_time_edit);
         rtn_place_edit = v.findViewById(R.id.rtn_place_edit);
 
@@ -72,7 +72,7 @@ public class routine_edit_dialog extends DialogFragment {
 
         //원래 써있는 아이템 정보 editText창에 불러오기
         rtn_title_edit.setText(rtn_Ename_str);
-        rtn_day_edit.setText(rtn_Eday_Str);
+//        rtn_day_edit.setText(rtn_Eday_Str);
         rtn_time_edit.setText(rtn_Etime_str);
         rtn_place_edit.setText(rtn_Eplace_str);
 
@@ -99,11 +99,11 @@ public class routine_edit_dialog extends DialogFragment {
             public void onClick(View view) {
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
                 String rt_name_e = rtn_title_edit.getText().toString();
-                String rt_day_e = rtn_day_edit.getText().toString();
+//                String rt_day_e = rtn_day_edit.getText().toString();
                 String rt_time_e = rtn_time_edit.getText().toString();
                 String rt_place_e = rtn_place_edit.getText().toString();
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
-                todo_object rt_o = new todo_object(rt_name_e, rt_time_e, rt_place_e, R.drawable.yellow_vertical_line, "Routine", rt_day_e);
+                todo_object rt_o = new todo_object(rt_name_e, rt_time_e, rt_place_e, R.drawable.yellow_vertical_line, "Routine", "rtn_day_edit");
                 adapter.editItem(position, rt_o);
 
                 dismiss();

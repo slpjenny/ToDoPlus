@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +39,14 @@ public class routine_add_dialog extends DialogFragment {
     static String rtn_time_str;
     static String rtn_place_str;
 
+    CheckBox checkM;
+    CheckBox checkTu;
+    CheckBox checkW;
+    CheckBox checkTh;
+    CheckBox checkF;
+    CheckBox checkSa;
+    CheckBox checkSu;
+
     public routine_add_dialog(){}
 
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,15 @@ public class routine_add_dialog extends DialogFragment {
 
         rtn_cancel = v.findViewById(R.id.rtn_cancel);
         rtn_add_ok = v.findViewById(R.id.rtn_add_ok);
+
+        //요일 체크박스
+        checkM=v.findViewById(R.id.checkM);
+        checkTu=v.findViewById(R.id.checkTu);
+        checkW=v.findViewById(R.id.checkW);
+        checkTh=v.findViewById(R.id.checkTh);
+        checkF=v.findViewById(R.id.checkF);
+        checkSa=v.findViewById(R.id.checkSa);
+        checkSu=v.findViewById(R.id.checkSu);
 
         rtn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
