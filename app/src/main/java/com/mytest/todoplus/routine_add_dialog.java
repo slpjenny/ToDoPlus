@@ -103,7 +103,7 @@ public class routine_add_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 TimePickerFragment tpk=new TimePickerFragment();
-                tpk.show(getParentFragmentManager(),"tpk");
+                tpk.show(getFragmentManager(),"tpk");
             }
         });
 

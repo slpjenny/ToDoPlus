@@ -1,11 +1,5 @@
 package com.mytest.todoplus;
 
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,6 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.amitshekhar.DebugDB;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
 
-    BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        // 데이터베이스 안의 데이터를 시각적으로 볼 수 있는 사이트를 로그로 출력해줌
+        DebugDB.getAddressLog();
+
     }
 
     //어댑터 안에서 각각의 아이템(프라그먼트 페이지들)을 데이터로서 관리한다
@@ -127,22 +131,5 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
 
         MainFragment.refresh();
-    }
-
-    @Override
-    //날짜 변경 감지 intent 받기
-    //브로드캐스트 리시버 동적 등록
-    protected void onResume() {
-        super.onResume();
-        IntentFilter filter=new IntentFilter();
-        filter.addAction(Intent.ACTION_DATE_CHANGED);
-        registerReceiver(mReceiver,filter);
-    }
-
-    //브로드캐스트 리시버 등록 해제
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mReceiver);
     }
 }

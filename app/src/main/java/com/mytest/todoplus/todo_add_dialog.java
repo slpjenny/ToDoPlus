@@ -82,7 +82,7 @@ public class todo_add_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 TimePickerFragment3 tpk3=new TimePickerFragment3();
-                tpk3.show(getParentFragmentManager(),"tpk3");
+                tpk3.show(getFragmentManager(),"tpk3");
             }
         });
         return v;

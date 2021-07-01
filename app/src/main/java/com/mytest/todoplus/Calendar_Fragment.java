@@ -1,33 +1,40 @@
 package com.mytest.todoplus;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.format.DateTimeFormatter;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
+
 public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnItemListener{
 
-    private static TextView monthText;
-    private static TextView yearText;
+    private TextView monthText;
+    private TextView yearText;
 
-    public static RecyclerView calenderRecyclerView;
-    public static LocalDate selectedDate;
+    private RecyclerView calenderRecyclerView;
+    private LocalDate selectedDate;
     private Context context; // fragment에서 토스트 사용하려고 추가함
 
     public Calendar_Fragment() {
@@ -40,6 +47,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         return fragment;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +60,26 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
                 //커스텀 다이얼로그 띄우기
                 memo_add_dialog memoDlg = new memo_add_dialog(getContext());
                 memoDlg.show();
+            }
+        });
+
+        Button backButton = (Button) rootView.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                previousMonthAction(v);
+            }
+        });
+
+        Button nextButton = (Button) rootView.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                nextMonthAction(v);
             }
         });
 
@@ -68,31 +96,26 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         //토스트 때문에 추가함
         context = container.getContext();
 
-        // 이전, 이후 달력 스와이프
-        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
-            public void onSwipeTop() {
-                selectedDate = selectedDate.minusMonths(1);
-                setMonthView();
-                Log.d("swipe","success swipeRight");
-            }
-            public void onSwipeRight() {
-                selectedDate = selectedDate.minusMonths(1);
-                setMonthView();
-                Log.d("swipe","success swipeRight");
-            }
-            public void onSwipeLeft() {
-                selectedDate = selectedDate.plusMonths(1);
-                setMonthView();
-            }
-            public void onSwipeBottom() {
-            }
-
-        });
+//        // 이전, 이후 달력 스와이프
+//        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
+//            public void onSwipeTop() {
+//            }
+//            public void onSwipeRight() {
+//                selectedDate = selectedDate.minusMonths(1);
+//                setMonthView();
+//            }
+//            public void onSwipeLeft() {
+//                selectedDate = selectedDate.plusMonths(1);
+//                setMonthView();
+//            }
+//            public void onSwipeBottom() {
+//            }
+//        });
 
         return rootView;
     }
 
-    public void setMonthView() {
+    private void setMonthView() {
         // month, year text에 맞는 데이터로 설정하기
         monthText.setText(monthFromDate(selectedDate));
         yearText.setText(yearFromDate(selectedDate));
@@ -110,7 +133,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     }
 
     // 그 달의 날짜들을 담고 있는 배열을 만들어주는 함수
-    private static ArrayList<String> daysInMonthArray(LocalDate date)
+    private ArrayList<String> daysInMonthArray(LocalDate date)
     {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
 
@@ -145,14 +168,14 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     }
 
     // 월 형식으로 보여주는 함수
-    private static String monthFromDate(LocalDate date)
+    private String monthFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
         return date.format(formatter);
     }
 
     // 년도 형식으로 보여주는 함수
-    private static String yearFromDate(LocalDate date)
+    private String yearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
         return date.format(formatter);
@@ -173,11 +196,12 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     }
 
     @Override
-    //이건 무슨 함수야? 클릭하면 뭐 나와?
     public void onItemClick(int position, String dayText) {
 
         if(dayText.equals(""))
         {
+
+        } else {
             String message = "Selected Date" +dayText + " " + monthFromDate(selectedDate);
             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }

@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,13 @@ public class memo_add_dialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_add_dialog);
 
+        // DB 생성코드
+        SQLiteHelper helper;
+        SQLiteDatabase db;
+        helper = new SQLiteHelper(getContext(), "newdb.db", null, 1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
         memoName=findViewById(R.id.memoName);
         memoContent=findViewById(R.id.memoContent);
         memoAdd_ok=findViewById(R.id.memoAdd_ok);
@@ -31,6 +39,18 @@ public class memo_add_dialog extends Dialog {
         memo_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        // 확인 눌렀을 때 DB에 데이터 추가
+        memoAdd_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = memoName.getText().toString();
+                String content = memoContent.getText().toString();
+
+                helper.insert(name, content);
                 dismiss();
             }
         });

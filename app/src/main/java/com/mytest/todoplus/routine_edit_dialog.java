@@ -115,7 +115,7 @@ public class routine_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 TimePickerFragment2 tpk2=new TimePickerFragment2();
-                tpk2.show(getParentFragmentManager(), "tpk2");
+                tpk2.show(getFragmentManager(), "tpk2");
 
             }
         });

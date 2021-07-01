@@ -111,7 +111,7 @@ public class todo_edit_dialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 TimePickerFragment4 tpk4=new TimePickerFragment4();
-                tpk4.show(getParentFragmentManager(),"tpk4");
+                tpk4.show(getFragmentManager(),"tpk4");
             }
         });
 
