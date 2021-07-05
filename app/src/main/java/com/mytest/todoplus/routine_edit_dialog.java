@@ -64,7 +64,7 @@ public class routine_edit_dialog extends DialogFragment {
 
         if (getArguments() != null) {
             rtn_Ename_str = getArguments().getString("itemTitle");
-            rtn_Eday_Str = getArguments().getString("itemDay");
+//            rtn_Eday_Str = getArguments().getString("itemDay");
             rtn_Etime_str = getArguments().getString("itemTime");
             rtn_Eplace_str = getArguments().getString("itemPlace");
             position = getArguments().getInt("itemPosition");
@@ -72,7 +72,6 @@ public class routine_edit_dialog extends DialogFragment {
 
         //원래 써있는 아이템 정보 editText창에 불러오기
         rtn_title_edit.setText(rtn_Ename_str);
-//        rtn_day_edit.setText(rtn_Eday_Str);
         rtn_time_edit.setText(rtn_Etime_str);
         rtn_place_edit.setText(rtn_Eplace_str);
 

@@ -12,7 +12,7 @@ public class todo_object {
     //boolean 의 초기화 하기 전 값-> false
     boolean isSelected;
 
-    //루틴에만 들어가는 요소
+    //루틴에만 들어가는 요소-> checkbox 요일
     String itemDay;
 
     public todo_object(String itemTitle,String itemTime,String itemPlace,int itemLine,String itemType,String itemDay){
