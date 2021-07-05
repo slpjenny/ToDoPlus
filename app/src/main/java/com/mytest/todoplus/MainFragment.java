@@ -117,7 +117,7 @@ public class MainFragment extends Fragment {
 
                     Bundle bundle=new Bundle();
                     bundle.putString("itemTitle",itemInfo.itemTitle);
-                    bundle.putString("itemDay",itemInfo.itemDay);
+//                    bundle.putString("itemDay",itemInfo.itemDay);
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
                     bundle.putInt("itemPosition",position);

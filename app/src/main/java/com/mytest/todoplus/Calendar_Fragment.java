@@ -2,15 +2,7 @@ package com.mytest.todoplus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,23 +11,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.format.DateTimeFormatter;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
-
-public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnItemListener{
+public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnItemListener {
 
     private TextView monthText;
     private TextView yearText;
 
     private RecyclerView calenderRecyclerView;
     private LocalDate selectedDate;
-    private Context context; // fragment에서 토스트 사용하려고 추가함
+    private Context mcontext; // fragment에서 토스트 사용하려고 추가함
+
 
     public Calendar_Fragment() {
         // Required empty public constructor
@@ -51,9 +46,9 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_calendar_, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_calendar_, container, false);
 
-        ImageView plusMemo=rootView.findViewById(R.id.plusMemo);
+        ImageView plusMemo = rootView.findViewById(R.id.plusMemo);
         plusMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,21 +59,17 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         });
 
         Button backButton = (Button) rootView.findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener()
-        {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 previousMonthAction(v);
             }
         });
 
         Button nextButton = (Button) rootView.findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener()
-        {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 nextMonthAction(v);
             }
         });
@@ -94,7 +85,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         setMonthView();
 
         //토스트 때문에 추가함
-        context = container.getContext();
+        mcontext = container.getContext();
 
 //        // 이전, 이후 달력 스와이프
 //        calenderRecyclerView.setOnTouchListener(new OnSwipeTouchListener(context) {
@@ -111,6 +102,8 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
 //            public void onSwipeBottom() {
 //            }
 //        });
+
+
 
         return rootView;
     }
@@ -133,8 +126,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     }
 
     // 그 달의 날짜들을 담고 있는 배열을 만들어주는 함수
-    private ArrayList<String> daysInMonthArray(LocalDate date)
-    {
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
 
         // 현재 날짜의 년도와 달을 yearMonth 변수에 저장
@@ -151,16 +143,12 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
         // 반복문으로 그 달의 날짜 배열 만들기
-        for (int i=2 ; i <=42; i++)
-        {
+        for (int i = 2; i <= 42; i++) {
             // 
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add("");
-            }
-            else
-            {
-                daysInMonthArray.add(String.valueOf(i-dayOfWeek));
+            } else {
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
             }
         }
         // 배열 반환
@@ -168,29 +156,25 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     }
 
     // 월 형식으로 보여주는 함수
-    private String monthFromDate(LocalDate date)
-    {
+    private String monthFromDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
         return date.format(formatter);
     }
 
     // 년도 형식으로 보여주는 함수
-    private String yearFromDate(LocalDate date)
-    {
+    private String yearFromDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
         return date.format(formatter);
     }
 
     // 뒤로 가기 버튼을 눌렀을 때 이전 달력 보여주는 함수
-    public void previousMonthAction(View view)
-    {
+    public void previousMonthAction(View view) {
         selectedDate = selectedDate.minusMonths(1);
         setMonthView();
     }
 
     // 앞으로 가기 버튼을 눌렀을 때 이전 달력 보여주는 함수
-    public void nextMonthAction(View view)
-    {
+    public void nextMonthAction(View view) {
         selectedDate = selectedDate.plusMonths(1);
         setMonthView();
     }
@@ -198,12 +182,17 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     @Override
     public void onItemClick(int position, String dayText) {
 
-        if(dayText.equals(""))
-        {
+        if (dayText.equals("")) {
 
         } else {
-            String message = "Selected Date" +dayText + " " + monthFromDate(selectedDate);
-            Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            String message = "Selected Date" + dayText + " " + monthFromDate(selectedDate);
+            Toast.makeText(mcontext.getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mcontext=context;
     }
 }

@@ -3,7 +3,6 @@ package com.mytest.todoplus;
 import android.app.Dialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +26,7 @@ public class memo_add_dialog extends Dialog {
         // DB 생성코드
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), "newdb.db", null, 1);
+        helper = new SQLiteHelper(getContext(), null,1);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
@@ -50,7 +49,7 @@ public class memo_add_dialog extends Dialog {
                 String name = memoName.getText().toString();
                 String content = memoContent.getText().toString();
 
-                helper.insert(name, content);
+                helper.insertMemo(name, content);
                 dismiss();
             }
         });

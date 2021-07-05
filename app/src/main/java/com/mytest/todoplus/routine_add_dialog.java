@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -25,7 +26,7 @@ import java.util.Calendar;
 public class routine_add_dialog extends DialogFragment {
 
     //new
-    public static todoAdapter adapter=new todoAdapter();
+    public static todoAdapter adapter = new todoAdapter();
 
     private EditText rtn_title;
     private static TextView rtn_time;
@@ -47,7 +48,11 @@ public class routine_add_dialog extends DialogFragment {
     CheckBox checkSa;
     CheckBox checkSu;
 
-    public routine_add_dialog(){}
+    boolean[] checkList;
+    String resultDay = ""; //최종 요일 변수
+
+    public routine_add_dialog() {
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +71,19 @@ public class routine_add_dialog extends DialogFragment {
         rtn_add_ok = v.findViewById(R.id.rtn_add_ok);
 
         //요일 체크박스
-        checkM=v.findViewById(R.id.checkM);
-        checkTu=v.findViewById(R.id.checkTu);
-        checkW=v.findViewById(R.id.checkW);
-        checkTh=v.findViewById(R.id.checkTh);
-        checkF=v.findViewById(R.id.checkF);
-        checkSa=v.findViewById(R.id.checkSa);
-        checkSu=v.findViewById(R.id.checkSu);
+        checkM = v.findViewById(R.id.checkM);
+        checkTu = v.findViewById(R.id.checkTu);
+        checkW = v.findViewById(R.id.checkW);
+        checkTh = v.findViewById(R.id.checkTh);
+        checkF = v.findViewById(R.id.checkF);
+        checkSa = v.findViewById(R.id.checkSa);
+        checkSu = v.findViewById(R.id.checkSu);
+
+        SQLiteHelper helper;
+        SQLiteDatabase db;
+        helper = new SQLiteHelper(getContext(), null,1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
 
         rtn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,36 +95,47 @@ public class routine_add_dialog extends DialogFragment {
         rtn_add_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rtn_title_str = rtn_title.getText().toString();
-                //체크된 요일 출력
-//                rtn_day_str = rtn_day.getText().toString();
-                rtn_time_str = rtn_time.getText().toString();
-                rtn_place_str = rtn_place.getText().toString();
+                checkList = new boolean[]{checkM.isChecked(), checkTu.isChecked(), checkW.isChecked(), checkTh.isChecked(), checkF.isChecked(), checkSa.isChecked(), checkSu.isChecked()};
 
-                todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", "rtnDay");
-                adapter.addItem(todo_item);
+                if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
+                    Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
+                } else if (rtn_title.getText().toString() == null) {
+                    Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    rtn_title_str = rtn_title.getText().toString();
 
-                Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                    //체크된 요일 출력
+                    checkDay();
 
-                dismiss();
+                    rtn_time_str = rtn_time.getText().toString();
+                    rtn_place_str = rtn_place.getText().toString();
+
+                    todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", resultDay);
+                    adapter.addItem(todo_item);
+
+                    //db에 저장
+                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_time_str,"Routine",resultDay,1);
+
+                    Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
 
         rtn_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerFragment tpk=new TimePickerFragment();
-                tpk.show(getFragmentManager(),"tpk");
+                TimePickerFragment tpk = new TimePickerFragment();
+                tpk.show(getFragmentManager(), "tpk");
             }
         });
-
         return v;
     }
 
     public void onResume() {
         //DialogFragment 의 넓이와 높이를 사용자 지정으로 바꾼다.
-        int width=getResources().getDimensionPixelSize(R.dimen.dialog_width);
-        int height=getResources().getDimensionPixelSize(R.dimen.dialog_height);
+        int width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+        int height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
         getDialog().getWindow().setLayout(width, height);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
@@ -138,7 +160,28 @@ public class routine_add_dialog extends DialogFragment {
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             // Do something with the time chosen by the user
-            rtn_time.setText(hourOfDay+":"+minute);
+            rtn_time.setText(hourOfDay + ":" + minute);
         }
+    }
+
+    public void checkDay() {
+        for (int i = 0; i < 7; i++) {
+            if (checkList[i] == true) {
+                resultDay = resultDay + printDay(i);
+            }
+        }
+    }
+
+    //인덱스에 따라 최종요일 변수에 넣을 요일 반환
+    public char printDay(int index) {
+        if (index == 0) return '월';
+        else if (index == 1) return '화';
+        else if (index == 2) return '수';
+        else if (index == 3) return '목';
+        else if (index == 4) return '금';
+        else if (index == 5) return '토';
+        else if (index == 6) return '일';
+
+        else return '0';
     }
 }
