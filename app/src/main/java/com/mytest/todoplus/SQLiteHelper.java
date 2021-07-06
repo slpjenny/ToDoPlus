@@ -26,7 +26,7 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
 //                + "title TEXT,"
 //                + "content TEXT);";
 
-//        db.execSQL(CREATE_MYMEMO);
+        db.execSQL(CREATE_MYMEMO);
         db.execSQL(CREATE_TOROUTINE);
     }
 

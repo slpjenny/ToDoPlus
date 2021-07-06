@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -26,14 +27,14 @@ public class memo_add_dialog extends Dialog {
         // DB 생성코드
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null,1);
+        helper = new SQLiteHelper(getContext(), null, 1);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
-        memoName=findViewById(R.id.memoName);
-        memoContent=findViewById(R.id.memoContent);
-        memoAdd_ok=findViewById(R.id.memoAdd_ok);
-        memo_cancel=findViewById(R.id.memo_cancel);
+        memoName = findViewById(R.id.memoName);
+        memoContent = findViewById(R.id.memoContent);
+        memoAdd_ok = findViewById(R.id.memoAdd_ok);
+        memo_cancel = findViewById(R.id.memo_cancel);
 
         memo_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +50,17 @@ public class memo_add_dialog extends Dialog {
                 String name = memoName.getText().toString();
                 String content = memoContent.getText().toString();
 
-                helper.insertMemo(name, content);
+                //제목 or 내용 입력하지 않았을 때
+                if (name == null) {
+                    Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                } else if (content == null) {
+                    Toast.makeText(getContext(), "메모를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    //db에 저장
+                    helper.insertMemo(name,content);
+                    Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                }
+
                 dismiss();
             }
         });

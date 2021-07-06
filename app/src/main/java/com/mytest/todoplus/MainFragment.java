@@ -77,7 +77,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 routine_add_dialog rtn_dlg = new routine_add_dialog();
-                rtn_dlg.show(getFragmentManager(),"show");
+                rtn_dlg.show(getActivity().getFragmentManager(),"show");
+//                rtn_dlg.show(getFragmentManager(),"show");
             }
         });
 
@@ -87,7 +88,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 todo_add_dialog todo_add_dlg = new todo_add_dialog();
-                todo_add_dlg.show(getFragmentManager(),"show");
+                todo_add_dlg.show(getActivity().getFragmentManager(), "show");
+//                todo_add_dlg.show(getFragmentManager(),"show");
 
             }
         });
@@ -110,7 +112,8 @@ public class MainFragment extends Fragment {
                     bundle.putInt("itemPosition",position);
                     todo_edit_dialog.setArguments(bundle);
 
-                    todo_edit_dialog.show(getFragmentManager(),"show");
+                    todo_edit_dialog.show(getActivity().getFragmentManager(), "show");
+//                    todo_edit_dialog.show(getFragmentManager(),"show");
 
                 }else if (itemInfo.itemType=="Routine"){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
@@ -123,7 +126,8 @@ public class MainFragment extends Fragment {
                     bundle.putInt("itemPosition",position);
                     routine_edit_dialog2.setArguments(bundle);
 
-                    routine_edit_dialog2.show(getFragmentManager(),"show");
+                    routine_edit_dialog2.show(getActivity().getFragmentManager(), "show");
+//                    routine_edit_dialog2.show(getFragmentManager(),"show");
                 }
             }
         });

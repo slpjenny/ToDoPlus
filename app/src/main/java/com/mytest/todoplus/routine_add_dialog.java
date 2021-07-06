@@ -1,6 +1,7 @@
 package com.mytest.todoplus;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
@@ -114,8 +114,7 @@ public class routine_add_dialog extends DialogFragment {
                     adapter.addItem(todo_item);
 
                     //db에 저장
-                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_time_str,"Routine",resultDay,1);
-
+                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay,1);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                     dismiss();
                 }
