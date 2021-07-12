@@ -87,7 +87,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
         //뷰 재사용을 막고, 계속 새로운 아이템을 생성하여 데이터 꼬임 문제 해결.
         holder.setIsRecyclable(false);
-        holder.onBind(items.get(position),position);
+        holder.onBind(items.get(position), position);
 
     }
 
@@ -131,14 +131,14 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_type = itemView.findViewById(R.id.item_type);
             item_day = itemView.findViewById(R.id.item_day);
 
-            checkBox=itemView.findViewById(R.id.checkbox);
-
+            checkBox = itemView.findViewById(R.id.checkbox);
 
             //viewholder 안에서 전달받은 뷰를 클릭했을 때~ listener 쪽으로 전달할 수 있다.***
             //각각의 item 뷰가 클릭되었을 때~ 인터페이스로 만든 함수 호출
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //아이템 position값 반환
                     int position = getAdapterPosition();
                     if (listener != null) {
                         listener.onItemClick(ViewHolder.this, view, position);
@@ -157,7 +157,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_day.setText(item.getItemDay());
         }
 
-        public void onBind(todo_object item,int position){
+        public void onBind(todo_object item, int position) {
             item_title.setText(item.getItemTitle());
             item_time.setText(item.getItemTime());
             item_place.setText(item.getItemPlace());
@@ -166,7 +166,12 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_day.setText(item.getItemDay());
 
             item.setNumber(position);
+        }
 
+        public int itemPosition() {
+            int itemPosition = getAdapterPosition();
+
+            return itemPosition;
         }
     }
 

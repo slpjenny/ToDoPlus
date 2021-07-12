@@ -16,6 +16,8 @@ public class BroadcastReceiver extends android.content.BroadcastReceiver {
             //recylerview 전체 아이템 훑어서 todo만 골라내기 되나
 
 
+
+
         }
     }
 }

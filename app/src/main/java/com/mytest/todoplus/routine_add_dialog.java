@@ -99,7 +99,7 @@ public class routine_add_dialog extends DialogFragment {
 
                 if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
                     Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (rtn_title.getText().toString() == null) {
+                } else if (rtn_title.getText().toString() == null) {  //왜 이건 적용 안되지?
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     rtn_title_str = rtn_title.getText().toString();
@@ -110,8 +110,14 @@ public class routine_add_dialog extends DialogFragment {
                     rtn_time_str = rtn_time.getText().toString();
                     rtn_place_str = rtn_place.getText().toString();
 
+                    //리싸이클러뷰 아이템으로 추가
                     todo_object todo_item = new todo_object(rtn_title_str, rtn_time_str, rtn_place_str, R.drawable.yellow_vertical_line, "Routine", resultDay);
                     adapter.addItem(todo_item);
+
+
+                    //해당 아이템의 position 찾기
+
+
 
                     //db에 저장
                     helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay,1);

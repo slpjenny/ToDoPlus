@@ -3,6 +3,7 @@ package com.mytest.todoplus;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -54,6 +55,12 @@ public class todo_add_dialog extends DialogFragment {
 
         todoAdd_cancel=v.findViewById(R.id.todoAdd_cancel);
         todoAdd_ok=v.findViewById(R.id.todoAdd_ok);
+
+        SQLiteHelper helper;
+        SQLiteDatabase db;
+        helper = new SQLiteHelper(getContext(), null,1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
 
         todoAdd_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

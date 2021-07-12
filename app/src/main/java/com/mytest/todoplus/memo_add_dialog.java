@@ -12,12 +12,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+
 public class memo_add_dialog extends Dialog {
 
     private EditText memoName;
     private EditText memoContent;
     private Button memoAdd_ok;
     private ImageView memo_cancel;
+
+    //날짜 가져올 변수
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +61,14 @@ public class memo_add_dialog extends Dialog {
                 String content = memoContent.getText().toString();
 
                 //제목 or 내용 입력하지 않았을 때
+                //이 부분 실행 안되는 중...
                 if (name == null) {
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else if (content == null) {
                     Toast.makeText(getContext(), "메모를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     //db에 저장
-                    helper.insertMemo(name,content);
+                    helper.insertMemo(name,content,getTime(),100);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                 }
 
@@ -65,6 +76,12 @@ public class memo_add_dialog extends Dialog {
             }
         });
 
+    }
+
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 
     public memo_add_dialog(@NonNull Context context) {

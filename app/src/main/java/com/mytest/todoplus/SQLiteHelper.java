@@ -20,12 +20,6 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
     @Override
     // myMemo라는 테이블 생성 후 title과 content라는 column 생성
     public void onCreate(SQLiteDatabase db) {
-//        String sql = "CREATE TABLE if not exists MYMEMO"
-//                + "("
-//                + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-//                + "title TEXT,"
-//                + "content TEXT);";
-
         db.execSQL(CREATE_MYMEMO);
         db.execSQL(CREATE_TOROUTINE);
     }
@@ -34,8 +28,12 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
             + "("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "title TEXT,"
-            + "content TEXT);";
+            + "content TEXT,"
+            + "date TEXT,"
+            + "acheivement INTEGER);";
 
+    //line은 저장이 아니라 type으로 구분해서 다시 불러와야하나?
+    //position 값 못불러오는 중
     public static final String CREATE_TOROUTINE = "CREATE TABLE if not exists TABLE_TOROUTINE"
             +
             "("
@@ -45,15 +43,15 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
             + "time TEXT,"
             + "place TEXT,"
             + "day TEXT,"
-            + "position INT);";
+            + "position INTEGER);";
 
 
     // 데이터 삽입 함수
-    public void insertMemo(String title, String content) {
+    public void insertMemo(String title, String content, String date, int achv) {
         // 읽고 쓰기가 가능하게 DB 열기
         SQLiteDatabase db = getWritableDatabase();
         // DB에 입력한 값으로 행 추가
-        db.execSQL("INSERT INTO MYMEMO VALUES(null, '" + title + "', '" + content + "');");
+        db.execSQL("INSERT INTO MYMEMO VALUES(null, '" + title + "', '" + content + "','" + date + "','" + achv + "');");
         db.close();
     }
 
