@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.amitshekhar.DebugDB;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 기기 빌드 오류 수정
+        AndroidThreeTen.init(this);
+
+        // 데이터 확인 로그 출력
+        DebugDB.getAddressLog();
 
         ViewPager pager = findViewById(R.id.viewpager);
         //캐싱을 해놓을 프래그먼트 개수
