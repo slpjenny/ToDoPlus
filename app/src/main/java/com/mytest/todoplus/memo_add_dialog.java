@@ -61,18 +61,17 @@ public class memo_add_dialog extends Dialog {
                 String content = memoContent.getText().toString();
 
                 //제목 or 내용 입력하지 않았을 때
-                //이 부분 실행 안되는 중...
-                if (name == null) {
+                if (name == null || name.equals("")) {
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (content == null) {
+                } else if (content == null || content.equals("")) {
                     Toast.makeText(getContext(), "메모를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     //db에 저장
                     helper.insertMemo(name,content,getTime(),100);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                    dismiss();
                 }
 
-                dismiss();
             }
         });
 
