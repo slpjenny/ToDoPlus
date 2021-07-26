@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         DebugDB.getAddressLog();
 
         //db선언
-        helper = new SQLiteHelper(this, null,1);
+        helper = new SQLiteHelper(this, null, 1);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
         //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
         helper.exequte_Query();
-        Log.d("exequte_Query","exequte_Query 실행됨");
+        Log.d("exequte_Query", "exequte_Query 실행됨");
 
 
         ViewPager pager = findViewById(R.id.viewpager);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
 
         //뷰 페이저의 1번째 페이지='달력'
-        calendar_fragment= new Calendar_Fragment();
+        calendar_fragment = new Calendar_Fragment();
         mpadapter.addItem(calendar_fragment);
 
         //뷰 페이저의 2번째 페이지='투두'(메인)
@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(mpadapter);
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        menu=bottomNavigationView.getMenu();
+        menu = bottomNavigationView.getMenu();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.tab1:
                         pager.setCurrentItem(0);
                         return true;
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
-        public void addItem(Fragment item){
+        public void addItem(Fragment item) {
             items.add(item);
         }
 
@@ -150,4 +150,11 @@ public class MainActivity extends AppCompatActivity {
 
         MainFragment.refresh();
     }
+
+//    //데이터베이스 닫기
+//    @Override
+//    protected void onDestroy() {
+//        helper.close();
+//        super.onDestroy();
+//    }
 }

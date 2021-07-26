@@ -71,7 +71,19 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     }
 
     public final void editItem(int position, todo_object td_o) {
+        //바꾸기 전의 아이템에서 title 뽑아내기
+        todo_object origin_item=getItem(position);
+        String origin_title=origin_item.getItemTitle();
+
         items.set(position, td_o);
+
+        String title=td_o.getItemTitle();
+        String time=td_o.getItemTime();
+        String place=td_o.getItemPlace();
+        String day=td_o.getItemDay();
+
+        helper.update_Query(title,time,place,day,origin_title);
+
         notifyItemChanged(position);
         MainFragment.refresh();
     }

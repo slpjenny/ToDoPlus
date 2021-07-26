@@ -117,7 +117,8 @@ public class routine_add_dialog extends DialogFragment {
 
 
                     //db에 저장
-                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
+                    helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay);
+//                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                     dismiss();
                 }

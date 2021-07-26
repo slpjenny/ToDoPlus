@@ -2,6 +2,7 @@ package com.mytest.todoplus;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,8 +117,12 @@ public class MainFragment extends Fragment {
             public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
                 todo_object itemInfo=adapter.getItem(position);
 
+                //
+                Log.d("clicked", String.valueOf(position));
+                Log.d("clicked2",itemInfo.getItemType());
+
                 //아이템 종류에 따라서 다른 '수정 다이얼로그' 띄우기
-                if(itemInfo.itemType=="ToDo") {
+                if(itemInfo.getItemType().equals("ToDo")) {
 
                     //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
                     todo_edit_dialog todo_edit_dialog = new todo_edit_dialog();
@@ -131,7 +136,7 @@ public class MainFragment extends Fragment {
 
                     todo_edit_dialog.show(getActivity().getFragmentManager(), "show");
 
-                }else if (itemInfo.itemType=="Routine"){
+                }else if (itemInfo.getItemType().equals("Routine")){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
 
                     Bundle bundle=new Bundle();

@@ -59,7 +59,7 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
     }
 
     //todo 아이템은 'day' 칼럼 없음
-    public void insert_Toroutine(String title, String time, String place, String type, String day) {
+    public void insert_Toroutine(String type, String title, String time, String place, String day) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO TABLE_TOROUTINE VALUES(null, '" + type + "', '" + title + "', '" + time + "', '" + place + "', '" + day + "');");
         db.close();
@@ -81,6 +81,15 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
         Log.d("title", title);
         db.execSQL("DELETE FROM TABLE_TOROUTINE WHERE title='" + title + "';");
     }
+
+    //-----------------------------------------------------------------
+    //데이터 변경
+    public void update_Query(String title, String time, String place, String day, String originTitle) {
+        SQLiteDatabase db = getWritableDatabase();
+        //어떤 아이템의 내용을 바꿀건지 안적었네..ㅋ
+        db.execSQL("UPDATE TABLE_TOROUTINE SET title='" + title + "', time='" + time + "', place='" + place + "', day='" + day + "' WHERE title='" + originTitle + "';");
+    }
+
 
     //-----------------------------------------------------------------
     //데이터 조회
