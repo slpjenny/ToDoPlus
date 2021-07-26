@@ -1,6 +1,8 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,10 +28,24 @@ public class MainActivity extends AppCompatActivity {
     MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
 
 
+    //db 선언
+    public static SQLiteHelper helper;
+    public static SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //db선언
+        helper = new SQLiteHelper(this, null,1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
+        //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
+        helper.exequte_Query();
+        Log.d("exequte_Query","exequte_Query 실행됨");
+
 
         ViewPager pager = findViewById(R.id.viewpager);
         //캐싱을 해놓을 프래그먼트 개수

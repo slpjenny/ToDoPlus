@@ -1,5 +1,7 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,16 @@ import java.util.ArrayList;
 public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> implements OnToDoItemClickListener, ItemTouchHelperListener {
 
     static ArrayList<todo_object> items = new ArrayList<todo_object>();
+
     OnToDoItemClickListener listener;
 
+    //db 선언
+    public static SQLiteHelper helper;
+    SQLiteDatabase db;
+
+
     //배열 리스트 items에 새로운 item 객체 추가하기기
-    public static void addItem(todo_object item) {
+    public final void addItem(todo_object item) {
         items.add(item);
         MainFragment.refresh();
     }
@@ -28,6 +36,12 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.todo_item, parent, false);
+
+        //db선언
+        helper = new SQLiteHelper(itemView.getContext(), null,1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
         return new ViewHolder(itemView, this);
     }
 
@@ -48,6 +62,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         items.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
+        helper.delete_todortn(position);
         MainFragment.refresh();
     }
 
@@ -108,6 +123,10 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     public void onItemSwipe(int position) {
         //position 값 입력받아서 해당 아이템 삭제
         items.remove(position);
+        Log.d("position", String.valueOf(position));
+        //지금 helper가 null 이라는건가?
+        helper.delete_todortn(position);
+
         notifyItemRemoved(position);
     }
 
