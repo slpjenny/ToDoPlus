@@ -85,6 +85,7 @@ public class routine_add_dialog extends DialogFragment {
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
+
         rtn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,12 +116,8 @@ public class routine_add_dialog extends DialogFragment {
                     adapter.addItem(todo_item);
 
 
-                    //해당 아이템의 position 찾기
-
-
-
                     //db에 저장
-                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay,1);
+                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                     dismiss();
                 }

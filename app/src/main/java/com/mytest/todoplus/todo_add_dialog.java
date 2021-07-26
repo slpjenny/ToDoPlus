@@ -79,6 +79,8 @@ public class todo_add_dialog extends DialogFragment {
                 todo_object todo_item = new todo_object(todo_title_str,todo_time_str,todo_place_str, R.drawable.green_vertical_line,"ToDo","");
                 adapter.addItem(todo_item);
 
+                //db에 저장
+                helper.insert_Toroutine(todo_title_str,todo_time_str,todo_place_str,"ToDo","");
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 
                 dismiss();

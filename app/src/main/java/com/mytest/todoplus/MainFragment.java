@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 // 현재 날짜 받아오기
 
@@ -25,6 +27,11 @@ public class MainFragment extends Fragment {
     public static todoAdapter adapter=new todoAdapter();
     private ItemTouchHelper mItemTouchHelper;
 
+    private List<todo_object> todo_objects;
+
+    //db 선언
+    public static SQLiteHelper helper;
+    public static SQLiteDatabase db;
 
     public MainFragment() {
         // Required empty public constructor
@@ -55,6 +62,14 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
+//        //db선언
+//        helper = new SQLiteHelper(getContext(), null,1);
+//        db = helper.getWritableDatabase();
+//        helper.onCreate(db);
+
+        //데이터 조회 함수 호출
+//        helper.exequte_Query();
+
         RecyclerView recyclerView=rootView.findViewById(R.id.recyclerView);
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
@@ -63,6 +78,7 @@ public class MainFragment extends Fragment {
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
 
         mItemTouchHelper=new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         mItemTouchHelper.attachToRecyclerView(recyclerView);
@@ -137,4 +153,5 @@ public class MainFragment extends Fragment {
     static public void refresh(){
         adapter.notifyDataSetChanged();
     }
+
 }
