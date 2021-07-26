@@ -59,10 +59,14 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     }
 
     public final void removeItem(int position) {
+        //position으로 어떤 아이템인지 정보 얻기
+        todo_object itemInfo=getItem(position);
+        String title=itemInfo.getItemTitle();
+
         items.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
-        helper.delete_todortn(position);
+        helper.delete_todortn(title);
         MainFragment.refresh();
     }
 
@@ -121,12 +125,13 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
     @Override
     public void onItemSwipe(int position) {
-        //position 값 입력받아서 해당 아이템 삭제
+        //position값으로 title 알아내서 해당 아이템 삭제
+        todo_object itemInfo=getItem(position);
+        String title=itemInfo.getItemTitle();
+
         items.remove(position);
         Log.d("position", String.valueOf(position));
-        //지금 helper가 null 이라는건가?
-        helper.delete_todortn(position);
-
+        helper.delete_todortn(title);
         notifyItemRemoved(position);
     }
 

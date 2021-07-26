@@ -58,7 +58,7 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
         db.close();
     }
 
-    //todo 항목은 day가 없다
+    //todo 아이템은 'day' 칼럼 없음
     public void insert_Toroutine(String title, String time, String place, String type, String day) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO TABLE_TOROUTINE VALUES(null, '" + type + "', '" + title + "', '" + time + "', '" + place + "', '" + day + "');");
@@ -76,11 +76,10 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
         db.close();
     }
 
-    public void delete_todortn(int position) {
+    public void delete_todortn(String title) {
         SQLiteDatabase db = getWritableDatabase();
-        Log.d("position", String.valueOf(position));
-        position=position+1;
-        db.execSQL("DELETE FROM TABLE_TOROUTINE WHERE _id="+position);
+        Log.d("title", title);
+        db.execSQL("DELETE FROM TABLE_TOROUTINE WHERE title='" + title + "';");
     }
 
     //-----------------------------------------------------------------

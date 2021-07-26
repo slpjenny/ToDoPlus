@@ -110,6 +110,7 @@ public class MainFragment extends Fragment {
             }
         });
 
+        //각각 아이템 클릭시 해당하는 '수정 다이얼로그' 팝업
         adapter.setOnItemClickListener(new OnToDoItemClickListener() {
             @Override
             public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
@@ -129,7 +130,6 @@ public class MainFragment extends Fragment {
                     todo_edit_dialog.setArguments(bundle);
 
                     todo_edit_dialog.show(getActivity().getFragmentManager(), "show");
-//                    todo_edit_dialog.show(getFragmentManager(),"show");
 
                 }else if (itemInfo.itemType=="Routine"){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();

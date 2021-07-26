@@ -61,6 +61,7 @@ public class todo_edit_dialog extends DialogFragment {
         todoEdit_remove=v.findViewById(R.id.todoEdit_remove);
 
 
+        //MainFragment로부터 데이터 번들 받기
         if(getArguments() != null) {
             todo_Ename_str = getArguments().getString("itemTitle");
             todo_Etime_str = getArguments().getString("itemTime");
