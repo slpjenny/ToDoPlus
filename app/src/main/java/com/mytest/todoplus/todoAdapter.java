@@ -70,13 +70,22 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         MainFragment.refresh();
     }
 
-    public final void editItem(int position, todo_object td_o) {
+    public final void editItem(int position, todo_object td_o, boolean isChecked) {
+        int checkedState;
+
+        if (isChecked == true){
+            checkedState = 1;
+        }else{
+            checkedState = 0;
+        }
+
         //바꾸기 전의 아이템에서 title 뽑아내기
         todo_object origin_item=getItem(position);
         String origin_title=origin_item.getItemTitle();
 
         //기존 자리에 새로운 객체를 생성해서 넣는 것
         items.set(position, td_o);
+        td_o.setSelected(isChecked);
         
         String title=td_o.getItemTitle();
         String time=td_o.getItemTime();
@@ -85,6 +94,8 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
         //기존의 title 기준으로 데이터 찾아서 db 내용 변경
         helper.update_Query(title,time,place,day,origin_title);
+        //checkbox 상태여부 변경될 때마다 db 정보 update
+        helper.update_checkbox_Qurey(checkedState,origin_title);
 
         notifyItemChanged(position);
         MainFragment.refresh();

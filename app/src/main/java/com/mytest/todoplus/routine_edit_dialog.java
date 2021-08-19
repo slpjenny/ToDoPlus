@@ -28,6 +28,7 @@ public class routine_edit_dialog extends DialogFragment {
 //    private EditText rtn_day_edit;
     public static TextView rtn_time_edit;
     private EditText rtn_place_edit;
+    private Boolean isChecked;
 
     private ImageView rtnEdit_cancel;
     private Button rtnEdit_ok;
@@ -83,12 +84,14 @@ public class routine_edit_dialog extends DialogFragment {
         checkSa = v.findViewById(R.id.checkSa);
         checkSu = v.findViewById(R.id.checkSu);
 
+        //MainFragment 에서 받은 data bundle
         if (getArguments() != null) {
             rtn_Ename_str = getArguments().getString("itemTitle");
 //            rtn_Eday_Str = getArguments().getString("itemDay");
             rtn_Etime_str = getArguments().getString("itemTime");
             rtn_Eplace_str = getArguments().getString("itemPlace");
             position = getArguments().getInt("itemPosition");
+            isChecked = getArguments().getBoolean("itemChecked");
         }
 
         //원래 써있는 아이템 정보 editText창에 불러오기
@@ -136,10 +139,9 @@ public class routine_edit_dialog extends DialogFragment {
 
                     //원래 써있는 정보 수정해서 아이템 내용 바꾸기
                 todo_object rt_o = new todo_object(rt_name_e, rt_time_e, rt_place_e, R.drawable.yellow_vertical_line, "Routine", resultDay);
-                adapter.editItem(position, rt_o);
+                adapter.editItem(position, rt_o, isChecked);
 
                 Toast.makeText(getContext(), "수정되었습니다.", Toast.LENGTH_SHORT).show();
-
 
                 dismiss();
 

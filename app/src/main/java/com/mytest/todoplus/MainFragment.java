@@ -2,7 +2,6 @@ package com.mytest.todoplus;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,10 +116,6 @@ public class MainFragment extends Fragment {
             public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
                 todo_object itemInfo=adapter.getItem(position);
 
-                //
-                Log.d("clicked", String.valueOf(position));
-                Log.d("clicked2",itemInfo.getItemType());
-
                 //아이템 종류에 따라서 다른 '수정 다이얼로그' 띄우기
                 if(itemInfo.getItemType().equals("ToDo")) {
 
@@ -132,6 +127,9 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
                     bundle.putInt("itemPosition",position);
+                    //checkbox state data 전송
+                    bundle.putBoolean("itemChecked",itemInfo.isSelected());
+
                     todo_edit_dialog.setArguments(bundle);
 
                     todo_edit_dialog.show(getActivity().getFragmentManager(), "show");
@@ -145,6 +143,8 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
                     bundle.putInt("itemPosition",position);
+                    //checkbox state data 전송
+                    bundle.putBoolean("itemChecked",itemInfo.isSelected());
                     routine_edit_dialog2.setArguments(bundle);
 
                     routine_edit_dialog2.show(getActivity().getFragmentManager(), "show");
