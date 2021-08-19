@@ -1,7 +1,10 @@
 package com.mytest.todoplus;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,8 @@ public class MainFragment extends Fragment {
     public static SQLiteHelper helper;
     public static SQLiteDatabase db;
 
+    public static int isTwice;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -40,7 +45,6 @@ public class MainFragment extends Fragment {
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
-
         return fragment;
     }
 
@@ -62,13 +66,22 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
-//        //db선언
-//        helper = new SQLiteHelper(getContext(), null,1);
-//        db = helper.getWritableDatabase();
-//        helper.onCreate(db);
 
-        //데이터 조회 함수 호출
-//        helper.exequte_Query();
+        Log.d("호출","onCreateView_fragment");
+
+        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
+
+
+        if(isTwice == 0) {
+            //db선언
+            helper = new SQLiteHelper(getActivity(), null, 2);
+            db = helper.getWritableDatabase();
+            helper.onCreate(db);
+
+            //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
+            helper.exequte_Query();
+
+        }
 
         RecyclerView recyclerView=rootView.findViewById(R.id.recyclerView);
 
@@ -159,4 +172,38 @@ public class MainFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Log.d("호출","onPause_fragment");
+
+        isTwice=1;
+
+        SharedPreferences pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("isTwice",isTwice);
+
+        Log.d("호출", String.valueOf(isTwice)+"__fragment_onPause");
+
+        editor.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("호출","onResume_fragment");
+
+        SharedPreferences pref= getActivity().getSharedPreferences("pref",Activity.MODE_PRIVATE);
+        if((pref.contains("isTwice"))){
+            int isTwice2 = pref.getInt("isTwice",isTwice);
+            isTwice=isTwice2;
+        }else if((pref != null)){
+            isTwice=0;
+        }
+
+        Log.d("호출", String.valueOf(isTwice));
+    }
 }
+

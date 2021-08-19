@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
 
-
     //db 선언
     public static SQLiteHelper helper;
     public static SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +45,16 @@ public class MainActivity extends AppCompatActivity {
         // 데이터 확인 로그 출력
         DebugDB.getAddressLog();
 
-        //db선언
-        helper = new SQLiteHelper(this, null, 2);
-        db = helper.getWritableDatabase();
-        helper.onCreate(db);
+        Log.d("호출","onCreate_mainActivity");
 
-        //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
-        helper.exequte_Query();
-        Log.d("exequte_Query", "exequte_Query 실행됨");
 
+//        //db선언
+//        helper = new SQLiteHelper(this, null, 2);
+//        db = helper.getWritableDatabase();
+//        helper.onCreate(db);
+//
+//        //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
+//        helper.exequte_Query();
 
         ViewPager pager = findViewById(R.id.viewpager);
         //캐싱을 해놓을 프래그먼트 개수
@@ -144,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        MainFragment.refresh();
-    }
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//
+//        MainFragment.refresh();
+//    }
 
 //    //데이터베이스 닫기
 //    @Override
