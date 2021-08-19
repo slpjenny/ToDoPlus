@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         DebugDB.getAddressLog();
 
         //db선언
-        helper = new SQLiteHelper(this, null, 1);
+        helper = new SQLiteHelper(this, null, 2);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 

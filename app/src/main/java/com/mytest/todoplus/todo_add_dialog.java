@@ -58,7 +58,7 @@ public class todo_add_dialog extends DialogFragment {
 
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null,1);
+        helper = new SQLiteHelper(getContext(), null,2);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
@@ -80,7 +80,7 @@ public class todo_add_dialog extends DialogFragment {
                 adapter.addItem(todo_item);
 
                 //db에 저장
-                helper.insert_Toroutine("ToDo",todo_title_str,todo_time_str,todo_place_str,"");
+                helper.insert_Toroutine("ToDo",todo_title_str,todo_time_str,todo_place_str,"",0);
                 Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 
                 dismiss();

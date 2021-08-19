@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -39,6 +41,17 @@ public class routine_edit_dialog extends DialogFragment {
 
     int position;
 
+    CheckBox checkM;
+    CheckBox checkTu;
+    CheckBox checkW;
+    CheckBox checkTh;
+    CheckBox checkF;
+    CheckBox checkSa;
+    CheckBox checkSu;
+
+    boolean[] checkList;
+    String resultDay = ""; //최종 변경된 요일 변수
+
     public routine_edit_dialog() {
     }
 
@@ -60,6 +73,15 @@ public class routine_edit_dialog extends DialogFragment {
         rtnEdit_cancel = v.findViewById(R.id.rtnEdit_cancel);
         rtnEdit_ok = v.findViewById(R.id.rtnEdit_ok);
         rtnEdit_remove = v.findViewById(R.id.rtnEdit_remove);
+
+        //요일 체크박스
+        checkM = v.findViewById(R.id.checkM);
+        checkTu = v.findViewById(R.id.checkTu);
+        checkW = v.findViewById(R.id.checkW);
+        checkTh = v.findViewById(R.id.checkTh);
+        checkF = v.findViewById(R.id.checkF);
+        checkSa = v.findViewById(R.id.checkSa);
+        checkSu = v.findViewById(R.id.checkSu);
 
         if (getArguments() != null) {
             rtn_Ename_str = getArguments().getString("itemTitle");
@@ -95,14 +117,29 @@ public class routine_edit_dialog extends DialogFragment {
         rtnEdit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                checkList = new boolean[]{checkM.isChecked(), checkTu.isChecked(), checkW.isChecked(), checkTh.isChecked(), checkF.isChecked(), checkSa.isChecked(), checkSu.isChecked()};
+
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
                 String rt_name_e = rtn_title_edit.getText().toString();
 //                String rt_day_e = rtn_day_edit.getText().toString();
                 String rt_time_e = rtn_time_edit.getText().toString();
                 String rt_place_e = rtn_place_edit.getText().toString();
-                //원래 써있는 정보 수정해서 아이템 내용 바꾸기
-                todo_object rt_o = new todo_object(rt_name_e, rt_time_e, rt_place_e, R.drawable.yellow_vertical_line, "Routine", "rtn_day_edit");
+
+                if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
+                    Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
+                } else if (rtn_title_edit.getText().toString().isEmpty()) {  //왜 이건 적용 안되지?
+                    Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                }
+                    //체크된 요일 출력
+                    checkDay();
+
+                    //원래 써있는 정보 수정해서 아이템 내용 바꾸기
+                todo_object rt_o = new todo_object(rt_name_e, rt_time_e, rt_place_e, R.drawable.yellow_vertical_line, "Routine", resultDay);
                 adapter.editItem(position, rt_o);
+
+                Toast.makeText(getContext(), "수정되었습니다.", Toast.LENGTH_SHORT).show();
+
 
                 dismiss();
 
@@ -151,5 +188,27 @@ public class routine_edit_dialog extends DialogFragment {
             // Do something with the time chosen by the user
             rtn_time_edit.setText(hourOfDay + ":" + minute);
         }
+    }
+
+
+    public void checkDay() {
+        for (int i = 0; i < 7; i++) {
+            if (checkList[i] == true) {
+                resultDay = resultDay + printDay(i);
+            }
+        }
+    }
+
+    //인덱스에 따라 최종요일 변수에 넣을 요일 반환
+    public char printDay(int index) {
+        if (index == 0) return '월';
+        else if (index == 1) return '화';
+        else if (index == 2) return '수';
+        else if (index == 3) return '목';
+        else if (index == 4) return '금';
+        else if (index == 5) return '토';
+        else if (index == 6) return '일';
+
+        else return '0';
     }
 }

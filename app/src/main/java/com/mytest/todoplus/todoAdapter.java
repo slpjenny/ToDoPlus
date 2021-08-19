@@ -38,7 +38,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         View itemView = inflater.inflate(R.layout.todo_item, parent, false);
 
         //db선언
-        helper = new SQLiteHelper(itemView.getContext(), null,1);
+        helper = new SQLiteHelper(itemView.getContext(), null,2);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
@@ -75,13 +75,15 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         todo_object origin_item=getItem(position);
         String origin_title=origin_item.getItemTitle();
 
+        //기존 자리에 새로운 객체를 생성해서 넣는 것
         items.set(position, td_o);
-
+        
         String title=td_o.getItemTitle();
         String time=td_o.getItemTime();
         String place=td_o.getItemPlace();
         String day=td_o.getItemDay();
 
+        //기존의 title 기준으로 데이터 찾아서 db 내용 변경
         helper.update_Query(title,time,place,day,origin_title);
 
         notifyItemChanged(position);
@@ -113,6 +115,22 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                 item.setSelected(isChecked);
+                //checkbox state db에 저장
+                boolean selected = item.isSelected();
+                String itemTitle=item.getItemTitle();
+
+                //update_Query 에 넣을 최종 체크상태
+                int saveChecked;
+
+                if (selected == true){
+                    saveChecked = 1;
+                }else{
+                    saveChecked = 0;
+                }
+
+                //checkbox 상태여부 변경될 때마다 db 정보 update
+                helper.update_checkbox_Qurey(saveChecked,itemTitle);
+
             }
         });
 
@@ -127,8 +145,12 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         todo_object item = items.get(from_position);
 
         //현재 위치와 움직일 위치 입력받아서 이동하기
+        //현재 위치의 아이템 삭제
         items.remove(from_position);
+        Log.d("from_hahaha", String.valueOf(from_position));
+        //이동할 위치에 아까 그 아이템을 다시 추가시킨다
         items.add(to_position, item);
+        Log.d("to_hahaha", String.valueOf(to_position));
         item.setNumber(to_position);
 
         notifyItemMoved(from_position, to_position);
@@ -200,6 +222,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_line.setImageResource(item.getItemLine());
             item_type.setText(item.getItemType());
             item_day.setText(item.getItemDay());
+
 
             item.setNumber(position);
         }

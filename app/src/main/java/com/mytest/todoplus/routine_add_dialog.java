@@ -81,7 +81,7 @@ public class routine_add_dialog extends DialogFragment {
 
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null,1);
+        helper = new SQLiteHelper(getContext(), null,2);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
@@ -100,7 +100,7 @@ public class routine_add_dialog extends DialogFragment {
 
                 if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
                     Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (rtn_title.getText().toString() == null) {  //왜 이건 적용 안되지?
+                } else if (rtn_title.getText().toString().isEmpty()) {  //왜 이건 적용 안되지?
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     rtn_title_str = rtn_title.getText().toString();
@@ -117,7 +117,7 @@ public class routine_add_dialog extends DialogFragment {
 
 
                     //db에 저장
-                    helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay);
+                    helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay,0);
 //                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                     dismiss();

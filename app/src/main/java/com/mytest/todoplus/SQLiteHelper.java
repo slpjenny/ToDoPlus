@@ -45,7 +45,8 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
             + "title TEXT,"
             + "time TEXT,"
             + "place TEXT,"
-            + "day TEXT);";
+            + "day TEXT,"
+            + "checked INTEGER);";
 
 
     //----------------------------------------------------------------------
@@ -59,9 +60,9 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
     }
 
     //todo 아이템은 'day' 칼럼 없음
-    public void insert_Toroutine(String type, String title, String time, String place, String day) {
+    public void insert_Toroutine(String type, String title, String time, String place, String day, int checked) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO TABLE_TOROUTINE VALUES(null, '" + type + "', '" + title + "', '" + time + "', '" + place + "', '" + day + "');");
+        db.execSQL("INSERT INTO TABLE_TOROUTINE VALUES(null, '" + type + "', '" + title + "', '" + time + "', '" + place + "', '" + day + "','" + checked + "');");
         db.close();
         ;
     }
@@ -90,6 +91,13 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
         db.execSQL("UPDATE TABLE_TOROUTINE SET title='" + title + "', time='" + time + "', place='" + place + "', day='" + day + "' WHERE title='" + originTitle + "';");
     }
 
+    //checkbox 상태여부 업데이트
+    public void update_checkbox_Qurey(int checked, String ortitle) {
+        SQLiteDatabase db = getWritableDatabase();
+        //기준을 position으로 해야할 것 같은데?ㅠ
+        db.execSQL("UPDATE TABLE_TOROUTINE SET checked='" + checked + "' WHERE title = '" + ortitle + "';");
+
+    }
 
     //-----------------------------------------------------------------
     //데이터 조회
@@ -100,7 +108,7 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
         String[] dbData = new String[]{};
         //Cursor-> 여러 레코드를 한 개씩 넘어가며 접근하는 객체
         //rawQurery-> 결과 값을 Cursor 객체로 받을 수 있는 SQL 실행방법
-        Cursor cursor = db.rawQuery("select _id, type, title, time, place, day from " + TABLE_TOROUTINE, null);
+        Cursor cursor = db.rawQuery("select _id, type, title, time, place, day, checked from " + TABLE_TOROUTINE, null);
         int recordCount = cursor.getCount(); //레코드 개수 세기
 
         //들어있는 투두/루틴 개수만큼 반복해서 데이터 조회
@@ -113,16 +121,29 @@ public class SQLiteHelper extends android.database.sqlite.SQLiteOpenHelper {
             String time = cursor.getString(3);
             String place = cursor.getString(4);
             String day = cursor.getString(5);
+            int checked = cursor.getInt(6);
 
-            Log.d("type", type);
 
             //저장했던 아이템들을 adapter에 다시 올리기
             if (type.equals("Routine")) {
                 todo_object todo_item = new todo_object(title, time, place, R.drawable.yellow_vertical_line, type, day);
                 adapter.addItem(todo_item);
+
+                if (checked == 0) {
+                    todo_item.setSelected(false);
+                } else if (checked == 1) {
+                    todo_item.setSelected(true);
+                }
+
             } else {
                 todo_object todo_item = new todo_object(title, time, place, R.drawable.green_vertical_line, type, day);
                 adapter.addItem(todo_item);
+
+                if (checked == 0) {
+                    todo_item.setSelected(false);
+                } else if (checked == 1) {
+                    todo_item.setSelected(true);
+                }
             }
         }
 
