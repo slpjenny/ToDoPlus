@@ -66,10 +66,8 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
-
-        Log.d("호출","onCreateView_fragment");
-
-        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
+//        Log.d("호출","onCreateView_fragment");
+//        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
 
 
         if(isTwice == 0) {
@@ -173,10 +171,11 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    //데이터를 저장
     public void onPause() {
         super.onPause();
 
-        Log.d("호출","onPause_fragment");
+//        Log.d("호출","onPause_fragment");
 
         isTwice=1;
 
@@ -184,12 +183,13 @@ public class MainFragment extends Fragment {
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("isTwice",isTwice);
 
-        Log.d("호출", String.valueOf(isTwice)+"__fragment_onPause");
+//        Log.d("호출", String.valueOf(isTwice)+"__fragment_onPause");
 
         editor.commit();
     }
 
     @Override
+    //잠시 저장해둔 데이터를 불러옴
     public void onResume() {
         super.onResume();
 
@@ -203,7 +203,7 @@ public class MainFragment extends Fragment {
             isTwice=0;
         }
 
-        Log.d("호출", String.valueOf(isTwice));
+//        Log.d("호출", String.valueOf(isTwice));
     }
 }
 
