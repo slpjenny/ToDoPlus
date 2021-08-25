@@ -39,7 +39,7 @@ public class memo_add_dialog extends Dialog {
         // DB 생성코드
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null, 1);
+        helper = new SQLiteHelper(getContext(), null, 2);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 

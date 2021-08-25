@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextFontTextView" parent="android:Widget.TextView">
+        <item name="android:fontFamily"> @font/nanumfont_r</item>
+    </style>
+
+    <style name="TextFontEditText" parent="android:Widget.EditText">
+        <item name="android:fontFamily"> @font/nanumfont_r</item>
+    </style>
+
+    <style name="TextFontButton" parent="android:Widget.Button">
+        <item name="android:fontFamily"> @font/nanumfont_r</item>
+    </style>
+
+</resources>

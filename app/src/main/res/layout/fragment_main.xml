@@ -75,8 +75,9 @@
             android:drawableLeft="@drawable/plus_btn_small"
             android:paddingLeft="25dip"
             android:text="루틴 추가하기"
+            android:fontFamily="@font/nanumsquareroundr"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/todo_add_btn"
@@ -92,7 +93,7 @@
             android:paddingLeft="25dip"
             android:text="할일 추가하기"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
 
     </LinearLayout>
 

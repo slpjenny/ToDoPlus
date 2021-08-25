@@ -1,6 +1,10 @@
 package com.mytest.todoplus;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 // 현재 날짜 받아오기
 
@@ -25,6 +30,13 @@ public class MainFragment extends Fragment {
     public static todoAdapter adapter=new todoAdapter();
     private ItemTouchHelper mItemTouchHelper;
 
+    private List<todo_object> todo_objects;
+
+    //db 선언
+    public static SQLiteHelper helper;
+    public static SQLiteDatabase db;
+
+    public static int isTwice;
 
     public MainFragment() {
         // Required empty public constructor
@@ -33,7 +45,6 @@ public class MainFragment extends Fragment {
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
-
         return fragment;
     }
 
@@ -55,6 +66,21 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
+//        Log.d("호출","onCreateView_fragment");
+//        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
+
+
+        if(isTwice == 0) {
+            //db선언
+            helper = new SQLiteHelper(getActivity(), null, 2);
+            db = helper.getWritableDatabase();
+            helper.onCreate(db);
+
+            //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
+            helper.exequte_Query();
+
+        }
+
         RecyclerView recyclerView=rootView.findViewById(R.id.recyclerView);
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
@@ -63,6 +89,7 @@ public class MainFragment extends Fragment {
         //이거 없으면 리싸이클러 뷰 안나타남
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
 
         mItemTouchHelper=new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         mItemTouchHelper.attachToRecyclerView(recyclerView);
@@ -94,13 +121,14 @@ public class MainFragment extends Fragment {
             }
         });
 
+        //각각 아이템 클릭시 해당하는 '수정 다이얼로그' 팝업
         adapter.setOnItemClickListener(new OnToDoItemClickListener() {
             @Override
             public void onItemClick(todoAdapter.ViewHolder holder, View view, int position) {
                 todo_object itemInfo=adapter.getItem(position);
 
                 //아이템 종류에 따라서 다른 '수정 다이얼로그' 띄우기
-                if(itemInfo.itemType=="ToDo") {
+                if(itemInfo.getItemType().equals("ToDo")) {
 
                     //다이얼로그에 item 정보 넘겨서, 이게 특정 item인 것을 알리기
                     todo_edit_dialog todo_edit_dialog = new todo_edit_dialog();
@@ -110,12 +138,14 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
                     bundle.putInt("itemPosition",position);
+                    //checkbox state data 전송
+                    bundle.putBoolean("itemChecked",itemInfo.isSelected());
+
                     todo_edit_dialog.setArguments(bundle);
 
                     todo_edit_dialog.show(getActivity().getFragmentManager(), "show");
-//                    todo_edit_dialog.show(getFragmentManager(),"show");
 
-                }else if (itemInfo.itemType=="Routine"){
+                }else if (itemInfo.getItemType().equals("Routine")){
                     routine_edit_dialog routine_edit_dialog2 = new routine_edit_dialog();
 
                     Bundle bundle=new Bundle();
@@ -124,6 +154,8 @@ public class MainFragment extends Fragment {
                     bundle.putString("itemPlace",itemInfo.itemPlace);
                     bundle.putString("itemTime",itemInfo.itemTime);
                     bundle.putInt("itemPosition",position);
+                    //checkbox state data 전송
+                    bundle.putBoolean("itemChecked",itemInfo.isSelected());
                     routine_edit_dialog2.setArguments(bundle);
 
                     routine_edit_dialog2.show(getActivity().getFragmentManager(), "show");
@@ -137,4 +169,41 @@ public class MainFragment extends Fragment {
     static public void refresh(){
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    //데이터를 저장
+    public void onPause() {
+        super.onPause();
+
+//        Log.d("호출","onPause_fragment");
+
+        isTwice=1;
+
+        SharedPreferences pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("isTwice",isTwice);
+
+//        Log.d("호출", String.valueOf(isTwice)+"__fragment_onPause");
+
+        editor.commit();
+    }
+
+    @Override
+    //잠시 저장해둔 데이터를 불러옴
+    public void onResume() {
+        super.onResume();
+
+        Log.d("호출","onResume_fragment");
+
+        SharedPreferences pref= getActivity().getSharedPreferences("pref",Activity.MODE_PRIVATE);
+        if((pref.contains("isTwice"))){
+            int isTwice2 = pref.getInt("isTwice",isTwice);
+            isTwice=isTwice2;
+        }else if((pref != null)){
+            isTwice=0;
+        }
+
+//        Log.d("호출", String.valueOf(isTwice));
+    }
 }
+

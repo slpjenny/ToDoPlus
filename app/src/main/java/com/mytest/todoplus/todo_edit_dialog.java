@@ -25,6 +25,7 @@ public class todo_edit_dialog extends DialogFragment {
     private EditText todo_name_edit;
     public static TextView todo_time_edit;
     private EditText todo_place_edit;
+    private Boolean isChecked;
 
     private ImageView todoEdit_cancel;
     private Button todoEdit_ok;
@@ -61,11 +62,14 @@ public class todo_edit_dialog extends DialogFragment {
         todoEdit_remove=v.findViewById(R.id.todoEdit_remove);
 
 
+        //MainFragment로부터 데이터 번들 받기
         if(getArguments() != null) {
             todo_Ename_str = getArguments().getString("itemTitle");
             todo_Etime_str = getArguments().getString("itemTime");
             todo_Eplace_str = getArguments().getString("itemPlace");
             position=getArguments().getInt("itemPosition");
+            isChecked = getArguments().getBoolean("itemChecked");
+
         }
 
         //원래 써있는 아이템 정보 editText창에 불러오기
@@ -100,7 +104,7 @@ public class todo_edit_dialog extends DialogFragment {
                 String td_place_e=todo_place_edit.getText().toString();
                 //원래 써있는 정보 수정해서 아이템 내용 바꾸기
                 todo_object td_o = new todo_object(td_name_e,td_time_e,td_place_e, R.drawable.green_vertical_line,"ToDo","");
-                adapter.editItem(position,td_o);
+                adapter.editItem(position,td_o,isChecked);
 
                 dismiss();
             }

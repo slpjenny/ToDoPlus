@@ -1,5 +1,7 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,16 @@ import java.util.ArrayList;
 public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> implements OnToDoItemClickListener, ItemTouchHelperListener {
 
     static ArrayList<todo_object> items = new ArrayList<todo_object>();
+
     OnToDoItemClickListener listener;
 
+    //db 선언
+    public static SQLiteHelper helper;
+    SQLiteDatabase db;
+
+
     //배열 리스트 items에 새로운 item 객체 추가하기기
-    public static void addItem(todo_object item) {
+    public final void addItem(todo_object item) {
         items.add(item);
         MainFragment.refresh();
     }
@@ -28,6 +36,12 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.todo_item, parent, false);
+
+        //db선언
+        helper = new SQLiteHelper(itemView.getContext(), null,2);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
         return new ViewHolder(itemView, this);
     }
 
@@ -45,14 +59,44 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
     }
 
     public final void removeItem(int position) {
+        //position으로 어떤 아이템인지 정보 얻기
+        todo_object itemInfo=getItem(position);
+        String title=itemInfo.getItemTitle();
+
         items.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
+        helper.delete_todortn(title);
         MainFragment.refresh();
     }
 
-    public final void editItem(int position, todo_object td_o) {
+    public final void editItem(int position, todo_object td_o, boolean isChecked) {
+        int checkedState;
+
+        if (isChecked == true){
+            checkedState = 1;
+        }else{
+            checkedState = 0;
+        }
+
+        //바꾸기 전의 아이템에서 title 뽑아내기
+        todo_object origin_item=getItem(position);
+        String origin_title=origin_item.getItemTitle();
+
+        //기존 자리에 새로운 객체를 생성해서 넣는 것
         items.set(position, td_o);
+        td_o.setSelected(isChecked);
+        
+        String title=td_o.getItemTitle();
+        String time=td_o.getItemTime();
+        String place=td_o.getItemPlace();
+        String day=td_o.getItemDay();
+
+        //기존의 title 기준으로 데이터 찾아서 db 내용 변경
+        helper.update_Query(title,time,place,day,origin_title);
+        //checkbox 상태여부 변경될 때마다 db 정보 update
+        helper.update_checkbox_Qurey(checkedState,origin_title);
+
         notifyItemChanged(position);
         MainFragment.refresh();
     }
@@ -82,6 +126,22 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                 item.setSelected(isChecked);
+                //checkbox state db에 저장
+                boolean selected = item.isSelected();
+                String itemTitle=item.getItemTitle();
+
+                //update_Query 에 넣을 최종 체크상태
+                int saveChecked;
+
+                if (selected == true){
+                    saveChecked = 1;
+                }else{
+                    saveChecked = 0;
+                }
+
+                //checkbox 상태여부 변경될 때마다 db 정보 update
+                helper.update_checkbox_Qurey(saveChecked,itemTitle);
+
             }
         });
 
@@ -96,8 +156,12 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         todo_object item = items.get(from_position);
 
         //현재 위치와 움직일 위치 입력받아서 이동하기
+        //현재 위치의 아이템 삭제
         items.remove(from_position);
+        Log.d("from_hahaha", String.valueOf(from_position));
+        //이동할 위치에 아까 그 아이템을 다시 추가시킨다
         items.add(to_position, item);
+        Log.d("to_hahaha", String.valueOf(to_position));
         item.setNumber(to_position);
 
         notifyItemMoved(from_position, to_position);
@@ -106,8 +170,13 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
     @Override
     public void onItemSwipe(int position) {
-        //position 값 입력받아서 해당 아이템 삭제
+        //position값으로 title 알아내서 해당 아이템 삭제
+        todo_object itemInfo=getItem(position);
+        String title=itemInfo.getItemTitle();
+
         items.remove(position);
+        Log.d("position", String.valueOf(position));
+        helper.delete_todortn(title);
         notifyItemRemoved(position);
     }
 
@@ -164,6 +233,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
             item_line.setImageResource(item.getItemLine());
             item_type.setText(item.getItemType());
             item_day.setText(item.getItemDay());
+
 
             item.setNumber(position);
         }

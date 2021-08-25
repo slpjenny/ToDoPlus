@@ -1,6 +1,8 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     MainPagerAdapter mpadapter = new MainPagerAdapter(getSupportFragmentManager());
 
+    //db 선언
+    public static SQLiteHelper helper;
+    public static SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
         // 데이터 확인 로그 출력
         DebugDB.getAddressLog();
 
+        Log.d("호출","onCreate_mainActivity");
+
+
+//        //db선언
+//        helper = new SQLiteHelper(this, null, 2);
+//        db = helper.getWritableDatabase();
+//        helper.onCreate(db);
+//
+//        //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
+//        helper.exequte_Query();
+
         ViewPager pager = findViewById(R.id.viewpager);
         //캐싱을 해놓을 프래그먼트 개수
         pager.setOffscreenPageLimit(3);
@@ -47,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 //        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
 
         //뷰 페이저의 1번째 페이지='달력'
-        calendar_fragment= new Calendar_Fragment();
+        calendar_fragment = new Calendar_Fragment();
         mpadapter.addItem(calendar_fragment);
 
         //뷰 페이저의 2번째 페이지='투두'(메인)
@@ -60,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(mpadapter);
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        menu=bottomNavigationView.getMenu();
+        menu = bottomNavigationView.getMenu();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.tab1:
                         pager.setCurrentItem(0);
                         return true;
@@ -113,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
-        public void addItem(Fragment item){
+        public void addItem(Fragment item) {
             items.add(item);
         }
 
@@ -128,10 +145,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//
+//        MainFragment.refresh();
+//    }
 
-        MainFragment.refresh();
-    }
+//    //데이터베이스 닫기
+//    @Override
+//    protected void onDestroy() {
+//        helper.close();
+//        super.onDestroy();
+//    }
 }
