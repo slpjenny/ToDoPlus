@@ -39,7 +39,7 @@ public class memo_add_dialog extends Dialog {
         // DB 생성코드
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null, 2);
+        helper = new SQLiteHelper(getContext(), null, 3);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
@@ -73,20 +73,27 @@ public class memo_add_dialog extends Dialog {
 
                 // 제목과 내용 모두 입력했을 때
                 } else {
-                    c.moveToLast();
-                    // 같은 날짜에 해당하는 데이터가 있으면 저장 안 되게
-                    if(c.getString(c.getColumnIndex("date")).equals(getTime())){
-                        Toast.makeText(getContext(), "이미 저장된 메모가 있어요!", Toast.LENGTH_SHORT).show();
-                        dismiss();
-                    }
-                    // 같은 날짜에 해당하는 데이터가 없으면 저장 되게
-                    else if (!c.getString(c.getColumnIndex("date")).equals(getTime())){
-                        // 오늘 저장한 메모 데이터가 없으면 db에 저장
+                    if (c.getCount() > 0) {
+                        c.moveToLast();
+                        // 커서 null값 확인코드 추가
+                        if(c.getString(c.getColumnIndex("date")).equals(getTime())){
+                            Toast.makeText(getContext(), "이미 저장된 메모가 있어요!", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                        // 같은 날짜에 해당하는 데이터가 없으면 저장 되게
+                        else if (!c.getString(c.getColumnIndex("date")).equals(getTime())){
+                            // 오늘 저장한 메모 데이터가 없으면 db에 저장
+                            helper.insertMemo(name,content,getTime(),100);
+                            Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                            //c.close();
+                            dismiss();
+
+                        }
+                    } else { // 데이터가 없을 때
                         helper.insertMemo(name,content,getTime(),100);
                         Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                         dismiss();
                     }
-
                 }
             }
         });

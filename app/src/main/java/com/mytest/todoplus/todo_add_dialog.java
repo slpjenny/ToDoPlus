@@ -58,7 +58,7 @@ public class todo_add_dialog extends DialogFragment {
 
         SQLiteHelper helper;
         SQLiteDatabase db;
-        helper = new SQLiteHelper(getContext(), null,2);
+        helper = new SQLiteHelper(getContext(), null,3);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 

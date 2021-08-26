@@ -72,7 +72,7 @@ public class MainFragment extends Fragment {
 
         if(isTwice == 0) {
             //db선언
-            helper = new SQLiteHelper(getActivity(), null, 2);
+            helper = new SQLiteHelper(getActivity(), null, 3);
             db = helper.getWritableDatabase();
             helper.onCreate(db);
 
