@@ -38,7 +38,7 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         View itemView = inflater.inflate(R.layout.todo_item, parent, false);
 
         //db선언
-        helper = new SQLiteHelper(itemView.getContext(), null,2);
+        helper = new SQLiteHelper(itemView.getContext(), null,3);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
 
