@@ -50,7 +50,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="370dp"
-            android:layout_height="400dp"
+            android:layout_height="380dp"
             android:layout_marginLeft="23dp" />
 
     </LinearLayout>
@@ -61,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="79dp"
         android:orientation="horizontal"
+        android:layout_margin="15dp"
         android:layout_marginBottom="5dp">
 
         <Button
@@ -73,11 +74,11 @@
             android:layout_weight="1"
             android:background="@drawable/main_round_btn"
             android:drawableLeft="@drawable/plus_btn_small"
-            android:paddingLeft="25dip"
-            android:text="루틴 추가하기"
             android:fontFamily="@font/nanumsquareroundr"
+            android:paddingLeft="18dip"
+            android:text="루틴 추가하기"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/todo_add_btn"
@@ -90,10 +91,10 @@
             android:background="@drawable/main_round_btn"
             android:backgroundTint="#DCF4EC"
             android:drawableLeft="@drawable/plus_btn_small"
-            android:paddingLeft="25dip"
+            android:paddingLeft="18dip"
             android:text="할일 추가하기"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
