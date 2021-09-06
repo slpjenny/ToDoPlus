@@ -37,7 +37,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="0dp"
             android:text="할일 이름"
-            android:textColor="#232323"
+            android:textColor="#5E5E5E"
             android:textStyle="bold" />
 
         <EditText
@@ -64,7 +64,7 @@
             android:layout_marginTop="0dp"
             android:text="시간"
             android:textAlignment="center"
-            android:textColor="#232323"
+            android:textColor="#5E5E5E"
             android:textStyle="bold" />
 
         <TextView
@@ -91,7 +91,7 @@
             android:layout_marginTop="0dp"
             android:text="장소"
             android:textAlignment="center"
-            android:textColor="#232323"
+            android:textColor="#5E5E5E"
             android:textStyle="bold" />
 
         <EditText
@@ -107,7 +107,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="7dp">
 
         <Button
             android:id="@+id/todoEdit_remove"
@@ -116,6 +116,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="#EDA45A"
+            android:textColor="#ffffff"
             android:text="삭제" />
 
         <Button
@@ -125,6 +126,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="#EDA45A"
+            android:textColor="#ffffff"
             android:text="확인" />
 
     </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="380dp"
-    android:layout_height="380dp"
+    android:layout_width="370dp"
+    android:layout_height="365dp"
     android:layout_gravity="center"
     android:background="@drawable/dialog_round_green"
     android:orientation="vertical">
@@ -120,11 +120,12 @@
 
         <Button
             android:id="@+id/todoAdd_ok"
-            android:layout_width="130dp"
-            android:layout_height="53dp"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginLeft="115dp"
             android:backgroundTint="#189B75"
+            android:shadowRadius="10"
             android:text="완료"
             android:textColor="#ffffff" />
 
