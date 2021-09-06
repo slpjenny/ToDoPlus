@@ -2,15 +2,74 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content">
+
     <item>
-        <!-- 사각형 지정 -->
-        <shape android:shape="rectangle">
-            <!-- 각 모서리 dip 만큼 코너형식 -->
-            <corners android:radius="15dip" />
-            <!-- 배경색 -->
-            <solid android:color="#D5F2F3F2" />
-            <!-- 라인색 및 두께 -->
-            <stroke android:width="2dp" android:color="#FFFFFF"/>
+
+        <shape>
+            <padding
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp"/>
+
+            <solid android:color="#00CCCCCC" />
+
+            <corners android:radius="10dp" />
         </shape>
     </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp"/>
+            <solid android:color="#10CCCCCC" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item>
+
+        <shape>
+            <padding
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp" />
+            <solid android:color="#20CCCCCC" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="1dp"
+                android:left="1dp"
+                android:right="1dp" />
+            <solid android:color="#30CCCCCC" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="1dp"
+                android:right="1dp"/>
+            <solid android:color="#50CCCCCC" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <!-- Background -->
+    <item
+        android:bottom="1dp"
+        android:right="1dp">
+        <shape
+            android:shape="rectangle">
+            <stroke android:color="#555"></stroke>
+            <solid android:color="#ffffff"/>
+            <corners android:radius="10dp"/>
+
+        </shape>
+    </item>
+
 </layer-list>
+
+

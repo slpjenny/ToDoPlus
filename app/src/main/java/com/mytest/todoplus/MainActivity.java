@@ -48,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("호출","onCreate_mainActivity");
 
 
-//        //db선언
-//        helper = new SQLiteHelper(this, null, 2);
-//        db = helper.getWritableDatabase();
-//        helper.onCreate(db);
-//
-//        //db에서 데이터 가져와서 리싸이클러뷰 addItem -> 저장 내용 뿌려주기
-//        helper.exequte_Query();
-
         ViewPager pager = findViewById(R.id.viewpager);
         //캐싱을 해놓을 프래그먼트 개수
         pager.setOffscreenPageLimit(3);
