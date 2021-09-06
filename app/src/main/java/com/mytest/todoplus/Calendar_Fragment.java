@@ -2,6 +2,8 @@ package com.mytest.todoplus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,9 @@ import org.threeten.bp.LocalDate;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnItemListener {
@@ -30,6 +34,11 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     private RecyclerView calenderRecyclerView;
     private LocalDate selectedDate;
     private Context mcontext; // fragment에서 토스트 사용하려고 추가함
+
+    //날짜 가져올 변수
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
     public Calendar_Fragment() {
@@ -57,6 +66,31 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
                 memoDlg.show();
             }
         });
+
+        // DB 생성코드
+        SQLiteHelper helper;
+        SQLiteDatabase db;
+        helper = new SQLiteHelper(getContext(), null, 3);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
+
+        Cursor c = db.query("mymemo", null, null, null, null, null, null, null);
+
+        ImageView dot = rootView.findViewById(R.id.dot);
+
+        // 메모 데이터가 있을 때
+        if(c.getCount()>0){
+            c.moveToLast();
+            // 오늘 날짜에 해당하는 데이터가 있을 떄
+            if(c.getString(c.getColumnIndex("date")).equals(getTime())){
+                Toast.makeText(getContext(), "이미 저장된 메모가 있어요!", Toast.LENGTH_SHORT).show();
+            }
+
+        } else { // 메모 데이터가 아예 없을 때
+            dot.setImageBitmap(null);
+        }
+
+
 
         Button backButton = (Button) rootView.findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +140,12 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
 
 
         return rootView;
+    }
+
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 
     private void setMonthView() {
