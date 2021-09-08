@@ -83,7 +83,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
             c.moveToLast();
             // 오늘 날짜에 해당하는 데이터가 있을 떄
             if(c.getString(c.getColumnIndex("date")).equals(getTime())){
-                Toast.makeText(getContext(), "이미 저장된 메모가 있어요!", Toast.LENGTH_SHORT).show();
+                //
             }
 
         } else { // 메모 데이터가 아예 없을 때
