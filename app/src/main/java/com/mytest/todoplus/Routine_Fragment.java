@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Routine_Fragment extends androidx.fragment.app.Fragment {
 
-    public static routinesAdapter adapter=new routinesAdapter();
+    public static routinesAdapter adapter2=new routinesAdapter();
 
     public Routine_Fragment() {
         // Required empty public constructor
@@ -32,20 +32,20 @@ public class Routine_Fragment extends androidx.fragment.app.Fragment {
         ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_routine_, container, false);
 
         routines_object routines_object=new routines_object("헐크 쓰다듬기");
-        adapter.addItem(routines_object);
+        adapter2.addItem(routines_object);
 
         RecyclerView recyclerView=rootView.findViewById(R.id.routines_recyclerview);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
+        adapter2.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter2);
 
         return rootView;
 
     }
 
     static public void refresh(){
-        adapter.notifyDataSetChanged();
+        adapter2.notifyDataSetChanged();
     }
 }

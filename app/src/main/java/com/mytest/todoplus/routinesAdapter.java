@@ -16,7 +16,7 @@ public class routinesAdapter extends RecyclerView.Adapter<routinesAdapter.ViewHo
 
     public final void addItem(routines_object routine){
         routines.add(routine);
-        //데이터 refresh 필
+        //데이터 refresh 필요 -> 아이템 추가될 시 바로 화면에 반영되도록한다.
         Routine_Fragment.refresh();
 
     }

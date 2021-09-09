@@ -27,6 +27,7 @@ public class routine_add_dialog extends DialogFragment {
 
     //new
     public static todoAdapter adapter = new todoAdapter();
+    public static routinesAdapter adapter2= new routinesAdapter();
 
     private EditText rtn_title;
     private static TextView rtn_time;
@@ -100,7 +101,7 @@ public class routine_add_dialog extends DialogFragment {
 
                 if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
                     Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (rtn_title.getText().toString().isEmpty()) {  //왜 이건 적용 안되지?
+                } else if (rtn_title.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     rtn_title_str = rtn_title.getText().toString();
@@ -121,6 +122,10 @@ public class routine_add_dialog extends DialogFragment {
 //                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
                     dismiss();
+
+                    //세번째 페이지 리싸이클러뷰 아이템으로 추가
+                    routines_object routines_item=new routines_object(rtn_title_str);
+                    adapter2.addItem(routines_item);
                 }
             }
         });
