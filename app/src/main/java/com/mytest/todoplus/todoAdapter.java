@@ -141,7 +141,6 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
 
                 //checkbox 상태여부 변경될 때마다 db 정보 update
                 helper.update_checkbox_Qurey(saveChecked,itemTitle);
-
             }
         });
 

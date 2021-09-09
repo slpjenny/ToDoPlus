@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="380dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="15dp"
+    android:background="@drawable/item_background">
+
+    <TextView
+        android:id="@+id/routine_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="루틴 제목1"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/one_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/routine_item_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:text="월"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold"
+                android:text="화"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:text="수"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold"
+                android:text="목"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold"
+                android:text="금"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold"
+                android:text="토"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="일"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/checkM"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="17dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkTu"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="15dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkW"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="17dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkTh"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="17dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkF"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="15dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkSa"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="17dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+            <CheckBox
+                android:id="@+id/checkSu"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="64dp"
+                android:button="@null"
+                android:background="@drawable/custom_date_checkbox"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
