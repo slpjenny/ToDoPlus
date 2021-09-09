@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/layout/calendar_cell.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_calendar_.xml" value="0.30460702687889696" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_routine_.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_routine_edit_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_todo_edit_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/routine_add_dialog.xml" value="0.335" />
