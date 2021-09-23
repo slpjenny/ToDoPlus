@@ -6,7 +6,7 @@
 
 1. [About the project](#about-the-project)
 2. [Function](#function)
-3. [Collaborators] (#collaborators)
+3. [Collaborators](#collaborators)
 4. [Reference](#reference)
 
 </div>
