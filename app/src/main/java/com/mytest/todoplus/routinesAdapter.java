@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class routinesAdapter extends RecyclerView.Adapter<routinesAdapter.ViewHo
 
     }
 
-
     static class ViewHolder extends RecyclerView.ViewHolder{
         static TextView routine_item_title;
 
@@ -47,15 +47,18 @@ public class routinesAdapter extends RecyclerView.Adapter<routinesAdapter.ViewHo
             super(itemView);
 
             routine_item_title=itemView.findViewById(R.id.routine_item_title);
-
+            Log.d("실행","1");
         }
 
-        public static void setItem(routines_object routines){
-            routine_item_title.setText(routines.getRoutine_item_title());
+        //여기서부터 실행이 안됨
+        public static void setItem(routines_object item){
+
+            Log.d("실행","2");
+            routine_item_title.setText(item.getRoutine_item_title());
+
         }
         public void onBind(routines_object routines,int position){
             routine_item_title.setText(routines.getRoutine_item_title());
-
         }
     }
 }

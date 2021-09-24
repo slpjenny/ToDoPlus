@@ -113,7 +113,6 @@ public class MainFragment extends Fragment {
                 todo_add_dialog todo_add_dlg = new todo_add_dialog();
                 todo_add_dlg.show(getActivity().getFragmentManager(), "show");
 //                todo_add_dlg.show(getFragmentManager(),"show");
-
             }
         });
 

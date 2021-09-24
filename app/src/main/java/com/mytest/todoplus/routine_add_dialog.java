@@ -24,9 +24,9 @@ import androidx.annotation.Nullable;
 import java.util.Calendar;
 
 public class routine_add_dialog extends DialogFragment {
-
-    //new
+    //메인페이지 리사이클러뷰 어댑터
     public static todoAdapter adapter = new todoAdapter();
+    //3번째 페이지 리사이클러뷰 어댑터
     public static routinesAdapter adapter2= new routinesAdapter();
 
     private EditText rtn_title;
