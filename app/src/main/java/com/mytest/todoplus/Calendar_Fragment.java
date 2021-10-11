@@ -84,7 +84,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
 //        if(dot.getDrawable() != null){
 //            dot.setImageDrawable(null);
 //        }
-        dot.setVisibility(View.INVISIBLE);
+        dot.setVisibility(View.VISIBLE);
 
         for (int i=0; i<c.getCount(); i++)
         {
@@ -111,8 +111,8 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         }
 
 
-
         Button backButton = (Button) rootView.findViewById(R.id.backButton);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

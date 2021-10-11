@@ -55,7 +55,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         Cursor c = db.query("mymemo", null, null, null, null, null, null, null);
         c.moveToFirst();
 
-//        dot = calender_view.findViewById(R.id.dot);
+
 //        if(dot != null){
 //            dot.setImageBitmap(null);
 //        }
@@ -92,9 +92,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
 
+        holder.dot.setVisibility(View.VISIBLE);
 
     }
-
     @Override
     public int getItemCount()
     {
