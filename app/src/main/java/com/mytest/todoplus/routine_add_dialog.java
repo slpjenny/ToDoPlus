@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,10 @@ import androidx.annotation.Nullable;
 import java.util.Calendar;
 
 public class routine_add_dialog extends DialogFragment {
-
-    //new
+    //메인페이지 리사이클러뷰 어댑터
     public static todoAdapter adapter = new todoAdapter();
+    //3번째 페이지 리사이클러뷰 어댑터
+    public static routineAdapter adapter2 = new routineAdapter();
 
     private EditText rtn_title;
     private static TextView rtn_time;
@@ -100,7 +102,7 @@ public class routine_add_dialog extends DialogFragment {
 
                 if (!checkM.isChecked() && !checkTu.isChecked() && !checkW.isChecked() && !checkTh.isChecked() && !checkF.isChecked() && !checkSa.isChecked() && !checkSu.isChecked()) {
                     Toast.makeText(getContext(), "요일을 선택해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (rtn_title.getText().toString().isEmpty()) {  //왜 이건 적용 안되지?
+                } else if (rtn_title.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "제목을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     rtn_title_str = rtn_title.getText().toString();
@@ -120,6 +122,16 @@ public class routine_add_dialog extends DialogFragment {
                     helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay,0);
 //                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+
+
+                    //세번째 페이지 리싸이클러뷰 아이템으로 추가
+                    routine_object routine_item = new routine_object(rtn_title_str);
+                    adapter2.addItem(routine_item);
+
+                    int count=adapter2.getItemCount();
+                    Log.d("count", String.valueOf(count));
+
+                    //다이얼로그 끝내기
                     dismiss();
                 }
             }

@@ -25,6 +25,7 @@ public class todo_object {
         this.number=number;
     }
 
+
     public String getItemTitle() {return itemTitle;}
     public void setItemTitle(String itemTitle) {this.itemTitle = itemTitle;}
 
