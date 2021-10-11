@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    ImageView dot;
 
     public Calendar_Fragment() {
         // Required empty public constructor
@@ -75,19 +77,37 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
         helper.onCreate(db);
 
         Cursor c = db.query("mymemo", null, null, null, null, null, null, null);
+        c.moveToFirst();
 
-        ImageView dot = rootView.findViewById(R.id.dot);
+        ViewGroup imageview = (ViewGroup) inflater.inflate(R.layout.calendar_cell, container, false);
+        dot = imageview.findViewById(R.id.dot);
+//        if(dot.getDrawable() != null){
+//            dot.setImageDrawable(null);
+//        }
+        dot.setVisibility(View.INVISIBLE);
 
-        // 메모 데이터가 있을 때
-        if(c.getCount()>0){
-            c.moveToLast();
-            // 오늘 날짜에 해당하는 데이터가 있을 떄
-            if(c.getString(c.getColumnIndex("date")).equals(getTime())){
-                Toast.makeText(getContext(), "이미 저장된 메모가 있어요!", Toast.LENGTH_SHORT).show();
-            }
+        for (int i=0; i<c.getCount(); i++)
+        {
+            // db에 메모 데이터가 있을 때 dot 이미지뷰가 보여야함
+            if(c.getCount()>0){
+                // (1) 커서가 가리키는 데이터의 날짜를 알아와서
+                // (2) 그 날짜가 캘린더 리싸이클러뷰의 어디 위치에 있는지 알아내고
+                // (3) 그 위치의 리싸이클러뷰 아이템의 이미지뷰를 보이게 한다.
 
-        } else { // 메모 데이터가 아예 없을 때
-            dot.setImageBitmap(null);
+                // (1)
+                String date = c.getString(c.getColumnIndex("date"));
+
+
+                // (2)
+                //LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+
+               // int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+                // dayOfweek-2를 한 값을 날짜에서 더하면 그 아이템 위치(포지션)임
+
+                // (3)
+                //dot.setImageResource(R.drawable.calendar_smalldot);
+
+            } else {}
         }
 
 
