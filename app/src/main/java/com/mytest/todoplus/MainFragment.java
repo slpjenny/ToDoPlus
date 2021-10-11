@@ -66,6 +66,10 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
+//        Log.d("호출","onCreateView_fragment");
+//        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
+
+
         if(isTwice == 0) {
             //db선언
             helper = new SQLiteHelper(getActivity(), null, 3);
@@ -113,6 +117,7 @@ public class MainFragment extends Fragment {
                 todo_add_dialog todo_add_dlg = new todo_add_dialog();
                 todo_add_dlg.show(getActivity().getFragmentManager(), "show");
 //                todo_add_dlg.show(getFragmentManager(),"show");
+
             }
         });
 
@@ -170,11 +175,15 @@ public class MainFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
+//        Log.d("호출","onPause_fragment");
+
         isTwice=1;
 
         SharedPreferences pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("isTwice",isTwice);
+
+//        Log.d("호출", String.valueOf(isTwice)+"__fragment_onPause");
 
         editor.commit();
     }
@@ -193,6 +202,8 @@ public class MainFragment extends Fragment {
         }else if((pref != null)){
             isTwice=0;
         }
+
+//        Log.d("호출", String.valueOf(isTwice));
     }
 }
 

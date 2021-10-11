@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:text="루틴 이름"
             android:textStyle="bold"
-            android:textColor="#5E5E5E"/>
+            android:textColor="#232323"/>
 
         <EditText
             android:id="@+id/rtn_title_edit"
@@ -65,7 +65,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="0dp"
             android:text="요일"
-            android:textColor="#5E5E5E"
+            android:textColor="#232323"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -204,7 +204,7 @@
             android:text="시간"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="#5E5E5E"/>
+            android:textColor="#232323"/>
 
         <TextView
             android:id="@+id/rtn_time_edit"
@@ -231,7 +231,7 @@
             android:text="장소"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="#5E5E5E"/>
+            android:textColor="#232323"/>
 
         <EditText
             android:id="@+id/rtn_place_edit"
@@ -251,10 +251,9 @@
             android:id="@+id/rtnEdit_remove"
             android:layout_width="120dp"
             android:layout_height="53dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="75dp"
             android:layout_marginTop="20dp"
             android:text="삭제"
-            android:textColor="#ffffff"
             android:backgroundTint="#EDA45A"/>
 
         <Button
@@ -264,7 +263,6 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:text="확인"
-            android:textColor="#ffffff"
             android:backgroundTint="#EDA45A"/>
 
     </LinearLayout>
