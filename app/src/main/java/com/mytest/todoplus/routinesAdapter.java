@@ -53,6 +53,7 @@ public class routinesAdapter extends RecyclerView.Adapter<routinesAdapter.ViewHo
         //여기서부터 실행이 안됨
         public static void setItem(routines_object item){
 
+            //얘는 투두 추가에서도 로그 안뜨는데?
             Log.d("실행","2");
             routine_item_title.setText(item.getRoutine_item_title());
 
