@@ -86,10 +86,10 @@ public class Calendar_Fragment extends Fragment implements CalendarAdapter.OnIte
                 //
             }
 
-        } else { // 메모 데이터가 아예 없을 때
-            dot.setImageBitmap(null);
         }
-
+//        else { // 메모 데이터가 아예 없을 때
+//            dot.setImageBitmap(null);
+//        }
 
 
         Button backButton = (Button) rootView.findViewById(R.id.backButton);
