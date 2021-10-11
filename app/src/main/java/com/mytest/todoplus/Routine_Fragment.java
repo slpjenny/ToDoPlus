@@ -36,9 +36,6 @@ public class Routine_Fragment extends androidx.fragment.app.Fragment {
         routineRecyclerView.setLayoutManager(layoutManager);
 //        routineAdapter adapter = new routineAdapter();
 
-        routine_object object = new routine_object("ㅗㅗㅗ");
-        adapter2.addItem(object);
-
         adapter2.notifyDataSetChanged();
         routineRecyclerView.setAdapter(adapter2);
 
