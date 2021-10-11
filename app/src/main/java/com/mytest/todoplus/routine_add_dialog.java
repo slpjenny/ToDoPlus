@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class routine_add_dialog extends DialogFragment {
     //메인페이지 리사이클러뷰 어댑터
     public static todoAdapter adapter = new todoAdapter();
     //3번째 페이지 리사이클러뷰 어댑터
-    public static routinesAdapter adapter2= new routinesAdapter();
+    public static routineAdapter adapter2 = new routineAdapter();
 
     private EditText rtn_title;
     private static TextView rtn_time;
@@ -121,11 +122,17 @@ public class routine_add_dialog extends DialogFragment {
                     helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay,0);
 //                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
-                    dismiss();
+
 
                     //세번째 페이지 리싸이클러뷰 아이템으로 추가
-                    routines_object routines_item=new routines_object(rtn_title_str);
-                    adapter2.addItem(routines_item);
+                    routine_object routine_item = new routine_object(rtn_title_str);
+                    adapter2.addItem(routine_item);
+
+                    int count=adapter2.getItemCount();
+                    Log.d("count", String.valueOf(count));
+
+                    //다이얼로그 끝내기
+                    dismiss();
                 }
             }
         });

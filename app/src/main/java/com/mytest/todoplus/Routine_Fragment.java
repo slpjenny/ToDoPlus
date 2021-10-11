@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Routine_Fragment extends androidx.fragment.app.Fragment {
 
-    public static routinesAdapter adapter2=new routinesAdapter();
+    public static routineAdapter adapter2 = new routineAdapter();
 
     public Routine_Fragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,30 +30,21 @@ public class Routine_Fragment extends androidx.fragment.app.Fragment {
 
         ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_routine_, container, false);
 
+        RecyclerView routineRecyclerView = rootView.findViewById(R.id.routines_recyclerview);
 
-        RecyclerView recyclerView=rootView.findViewById(R.id.routines_recyclerview);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        routineRecyclerView.setLayoutManager(layoutManager);
+//        routineAdapter adapter = new routineAdapter();
 
-        recyclerView.setAdapter(adapter2);
-        Log.d("실행","3");
+        routine_object object = new routine_object("ㅗㅗㅗ");
+        adapter2.addItem(object);
 
-
-        String title = "gjfgjf";
-        routines_object routine_item=new routines_object(title);
-
-        adapter2.addItem(routine_item);
-        Log.d("실행","4");
-
-
-        //아이템은 잘 들어옴
-//        Log.d("ItemCount", String.valueOf(num));
-
+        adapter2.notifyDataSetChanged();
+        routineRecyclerView.setAdapter(adapter2);
 
         return rootView;
     }
 
-    static public void refresh(){
-        adapter2.notifyDataSetChanged();
-    }
+    static public void refresh2(){ adapter2.notifyDataSetChanged();}
+
 }
