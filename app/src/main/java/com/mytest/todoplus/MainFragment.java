@@ -66,10 +66,6 @@ public class MainFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
 
-//        Log.d("호출","onCreateView_fragment");
-//        Log.d("호출", String.valueOf(isTwice) +"__fragmnet-onCreateView");
-
-
         if(isTwice == 0) {
             //db선언
             helper = new SQLiteHelper(getActivity(), null, 3);
@@ -203,7 +199,6 @@ public class MainFragment extends Fragment {
             isTwice=0;
         }
 
-//        Log.d("호출", String.valueOf(isTwice));
     }
 }
 

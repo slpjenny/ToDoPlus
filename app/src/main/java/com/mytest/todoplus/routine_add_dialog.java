@@ -29,6 +29,8 @@ public class routine_add_dialog extends DialogFragment {
     public static todoAdapter adapter = new todoAdapter();
     //3번째 페이지 리사이클러뷰 어댑터
     public static routineAdapter adapter2 = new routineAdapter();
+    //routine들만 세는 변수
+    public static int st_rtn_position=0;
 
     private EditText rtn_title;
     private static TextView rtn_time;
@@ -120,16 +122,15 @@ public class routine_add_dialog extends DialogFragment {
 
                     //db에 저장
                     helper.insert_Toroutine("Routine",rtn_title_str,rtn_time_str,rtn_place_str,resultDay,0);
-//                    helper.insert_Toroutine(rtn_title_str,rtn_time_str,rtn_place_str,"Routine",resultDay);
                     Toast.makeText(getContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
 
+                    //routine 만 있는 디비 테이블에 저장
+//                    helper.insert_routine(rtn_title_str,st_rtn_position);
+//                    st_rtn_position = st_rtn_position+1;
 
                     //세번째 페이지 리싸이클러뷰 아이템으로 추가
                     routine_object routine_item = new routine_object(rtn_title_str);
                     adapter2.addItem(routine_item);
-
-                    int count=adapter2.getItemCount();
-                    Log.d("count", String.valueOf(count));
 
                     //다이얼로그 끝내기
                     dismiss();

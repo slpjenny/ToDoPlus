@@ -174,7 +174,6 @@ public class todoAdapter extends RecyclerView.Adapter<todoAdapter.ViewHolder> im
         String title=itemInfo.getItemTitle();
 
         items.remove(position);
-        Log.d("position", String.valueOf(position));
         helper.delete_todortn(title);
         notifyItemRemoved(position);
     }

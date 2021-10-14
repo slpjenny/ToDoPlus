@@ -1,5 +1,7 @@
 package com.mytest.todoplus;
 
+import static com.mytest.todoplus.SQLiteHelper.adapter2;
+
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -23,6 +25,7 @@ public class routine_edit_dialog extends DialogFragment {
 
     //new
     public static todoAdapter adapter = new todoAdapter();
+    public static routineAdapter adapter2 = new routineAdapter();
 
     private EditText rtn_title_edit;
 //    private EditText rtn_day_edit;
@@ -112,6 +115,7 @@ public class routine_edit_dialog extends DialogFragment {
             public void onClick(View view) {
                 //리싸이클러뷰에서 해당 아이템 삭제시키기 기능
                 adapter.removeItem(position);
+                adapter2.removeItem2(position);
                 //다이얼로그 사라짐.
                 dismiss();
             }

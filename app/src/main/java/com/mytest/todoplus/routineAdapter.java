@@ -1,5 +1,6 @@
 package com.mytest.todoplus;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 public class routineAdapter extends RecyclerView.Adapter<routineAdapter.ViewHolder> {
 
     static ArrayList<routine_object> routines = new ArrayList<routine_object>();
+    //db 선언
+    public static SQLiteHelper helper;
+    SQLiteDatabase db;
 
     @NonNull
     @Override
@@ -36,6 +40,26 @@ public class routineAdapter extends RecyclerView.Adapter<routineAdapter.ViewHold
     public void addItem(routine_object item){
         routines.add(item);
         Routine_Fragment.refresh2();
+    }
+
+
+//    메인에 있는 리사이클러뷰랑 순서 다르게 세니까, position으로 삭제하면 순서 뒤바뀜.
+//    제목 비교 후 삭제 방법?
+    public final void removeItem2(int position){
+        routine_object itemInfo = getItem(position);
+        String title=itemInfo.getRoutine_title();
+
+        routines.remove(position);
+//        helper.delete_myroutine(title);
+        notifyItemRemoved(position);
+
+        notifyItemRangeChanged(position, routines.size());
+//        Routine_Fragment.refresh2();
+
+    }
+
+    public final void removeItemAll(){
+        routines.clear();
     }
 
     public void setItems(ArrayList<routine_object> items){
